@@ -12,7 +12,7 @@
 
 
 # Ignore enviroments  config
-/config/enviroments/*
+/config/enviroments/.*
 
 
 # Ignore bundler config.

@@ -38,4 +38,14 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.action_mailer.default_url_options = { :host => 'tuns.dev' }
+  config.action_mailer.smtp_settings = {
+    :address   => "smtp.mandrillapp.com",
+    :port      => 587, # or 587
+    :enable_starttls_auto => true, # detects and uses STARTTLS
+    :user_name => "davide.santangelo@gmail.com",
+    :password  => "VOkhdTkNZH06EtuOooy_vg",
+    :authentication => 'login' # Mandrill supports 'plain' or 'login'
+  }  
 end
