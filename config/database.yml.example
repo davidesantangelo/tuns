@@ -1,0 +1,16 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: tuns_development
+
+test:
+  <<: *default
+  database: tuns_test
+
+production:
+  <<: *default
+  database: tuns_production

@@ -1,0 +1,35 @@
+development:
+  facebook:
+    app_id: 
+    secret:  
+    scope: public_profile,email
+  twitter:
+    app_id: 
+    secret: 
+  google_oauth2:
+    app_id: 
+    secret: 
+
+production:
+  facebook:
+    app_id: 
+    secret:  
+    scope: public_profile,email
+  twitter:
+    app_id: 
+    secret: 
+  google_oauth2:
+    app_id: 
+    secret: 
+
+staging:
+  facebook:
+    app_id: 
+    secret:  
+    scope: public_profile,email
+  twitter:
+    app_id: 
+    secret: 
+  google_oauth2:
+    app_id: 
+    secret: 
