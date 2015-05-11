@@ -10,6 +10,11 @@
 # Ignore congig omniauth.yml
 /config/omniauth.yml
 
+
+# Ignore enviroments  config
+/config/enviroments/*
+
+
 # Ignore bundler config.
 /.bundle
 
