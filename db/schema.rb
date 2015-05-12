@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150512152433) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "followers", ["user_id", "username"], name: "index_followers_on_user_id_and_username", unique: true, using: :btree
   add_index "followers", ["user_id"], name: "index_followers_on_user_id", using: :btree
 
   create_table "identities", force: :cascade do |t|
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 20150512152433) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "unfollowers", ["user_id", "username"], name: "index_unfollowers_on_user_id_and_username", unique: true, using: :btree
   add_index "unfollowers", ["user_id"], name: "index_unfollowers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|

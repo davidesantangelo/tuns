@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :complete]
   before_action :load_config
-  before_action :fetch_followers, if: :valid_request?
+  before_action :fetch_followers, only: [:show]
   before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
 
 
@@ -33,7 +33,6 @@ class UsersController < ApplicationController
   def complete
     if request.patch? && params[:user]
       if @user.update(user_params)
-        @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
         redirect_to @user, notice: 'Your profile was successfully updated.'
       else
@@ -57,7 +56,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      accessible = [ :name, :email, :username ] # extend with your own params
+      accessible = [ :name, :email, :username ]
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
     end
@@ -74,7 +73,7 @@ class UsersController < ApplicationController
 
     def fetch_followers
       cursor = "-1"
-      while cursor != 0 do
+      while cursor != 0 and valid_request? do
         begin
           limited_followers = @twitter_client.followers(current_user.username, {cursor: cursor} )
           Request.create(user_id: current_user.id, resource: 'followers')
@@ -87,7 +86,6 @@ class UsersController < ApplicationController
           retry
         end
       end
-      return @followers
     end
 
     def valid_request?
