@@ -1,0 +1,17 @@
+development:
+  consumer_key: "consumer_key"
+  consumer_secret: "consumer_secret"
+  access_token: "access_token"
+  access_token_secret: "access_token_secret"
+
+production:
+  consumer_key: "consumer_key"
+  consumer_secret: "consumer_secret"
+  access_token: "access_token"
+  access_token_secret: "access_token_secret"
+
+staging:
+  consumer_key: "consumer_key"
+  consumer_secret: "consumer_secret"
+  access_token: "access_token"
+  access_token_secret: "access_token_secret"

@@ -7,13 +7,14 @@
 # Ignore config database.yml
 /config/database.yml
 
-# Ignore congig omniauth.yml
+# Ignore config omniauth.yml
 /config/omniauth.yml
 
+# Ignore config twitter.yml
+/config/twitter.yml
 
 # Ignore enviroments  config
 /config/enviroments/.*
-
 
 # Ignore bundler config.
 /.bundle

@@ -1,22 +1,22 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :complete]
+  before_action :load_config
+  before_action :fetch_followers, if: :valid_request?
   before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
 
 
   # GET /users/:id.:format
   def show
-    # authorize! :read, @user
+    current_user.followers
   end
 
   # GET /users/:id/edit
   def edit
-    # authorize! :update, @user
   end
 
   # PATCH/PUT /users/:id.:format
   def update
-    # authorize! :update, @user
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user == current_user ? @user : current_user, :bypass => true)
@@ -31,8 +31,7 @@ class UsersController < ApplicationController
 
   # GET/PATCH /users/:id/complete
   def complete
-    # authorize! :update, @user 
-    if request.patch? && params[:user] #&& params[:user][:email]
+    if request.patch? && params[:user]
       if @user.update(user_params)
         @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
@@ -45,7 +44,6 @@ class UsersController < ApplicationController
 
   # DELETE /users/:id.:format
   def destroy
-    # authorize! :delete, @user
     @user.destroy
     respond_to do |format|
       format.html { redirect_to root_url }
@@ -59,8 +57,41 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      accessible = [ :name, :email ] # extend with your own params
+      accessible = [ :name, :email, :username ] # extend with your own params
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
+    end
+
+    def load_config
+      twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
+      @twitter_client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = twitter_config['consumer_key']
+        config.consumer_secret     = twitter_config['consumer_secret']
+        config.access_token        = current_user.access_token
+        config.access_token_secret = current_user.access_token_secret
+      end
+    end
+
+    def fetch_followers
+      cursor = "-1"
+      while cursor != 0 do
+        begin
+          limited_followers = @twitter_client.followers(current_user.username, {cursor: cursor} )
+          Request.create(user_id: current_user.id, resource: 'followers')
+          limited_followers.attrs[:users].each do |follower|
+            Follower.where(user_id: current_user.id, username: follower[:screen_name]).first_or_create
+          end
+          cursor = limited_followers.attrs[:next_cursor]
+        rescue Twitter::Error::TooManyRequests => error
+          sleep error.rate_limit.reset_in + 1
+          retry
+        end
+      end
+      return @followers
+    end
+
+    def valid_request?
+      # 15 requests per window per leveraged access token https://dev.twitter.com/rest/public/rate-limiting
+      current_user.requests.size <= 15 or (Time.now.to_i - current_user.requests.last.created_at.to_i) > 900
     end
 end
