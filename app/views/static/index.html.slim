@@ -1,2 +1,13 @@
-= button_to omniauth_authorize_path(User.new, 'twitter', signin: true), id: "twitter-login", :class=>"btn btn-lg btn-twitter btn-block" do
-  i.fa.fa-twitter Twitter  
+
+section.top
+  .inner
+    h1
+      | T.U.N.S.
+    p
+      | Twitter Unfollower Notification Service.
+br/
+.row
+  .col-md-6.col-md-offset-3
+	  = button_to omniauth_authorize_path(User.new, 'twitter', signin: true), id: "twitter-login", :class=>"btn btn-lg btn-twitter btn-block" do
+		  i.fa.fa-twitter
+		    |  Continue With Twitter  

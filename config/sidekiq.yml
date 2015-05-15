@@ -1,0 +1,5 @@
+---
+:concurrency: 10
+:daemon: true
+:pidfile: tmp/pids/sidekiq.pid
+:logfile: log/sidekiq.log

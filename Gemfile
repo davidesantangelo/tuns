@@ -36,6 +36,11 @@ gem 'bootstrap-sass', '~> 3.3.4'
 gem 'font-awesome-rails'
 # A Ruby interface to the Twitter API.
 gem 'twitter'
+# FriendlyId
+gem 'friendly_id', '~> 5.1.0' 
+# SideKiq
+gem 'sidekiq'
+gem 'sinatra', :require => nil
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

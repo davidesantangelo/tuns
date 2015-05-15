@@ -2,13 +2,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :complete]
   before_action :load_config
-  before_action :fetch_followers, only: [:show]
   before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
 
 
   # GET /users/:id.:format
   def show
     current_user.followers
+    @twitter_client
   end
 
   # GET /users/:id/edit
@@ -33,6 +33,7 @@ class UsersController < ApplicationController
   def complete
     if request.patch? && params[:user]
       if @user.update(user_params)
+        SyncWorker.perform_async(current_user.id)
         sign_in(@user, :bypass => true)
         redirect_to @user, notice: 'Your profile was successfully updated.'
       else
@@ -52,7 +53,7 @@ class UsersController < ApplicationController
   
   private
     def set_user
-      @user = User.find(params[:id])
+      @user = User.friendly.find(params[:id])
     end
 
     def user_params
@@ -68,23 +69,6 @@ class UsersController < ApplicationController
         config.consumer_secret     = twitter_config['consumer_secret']
         config.access_token        = current_user.access_token
         config.access_token_secret = current_user.access_token_secret
-      end
-    end
-
-    def fetch_followers
-      cursor = "-1"
-      while cursor != 0 and valid_request? do
-        begin
-          limited_followers = @twitter_client.followers(current_user.username, {cursor: cursor} )
-          Request.create(user_id: current_user.id, resource: 'followers')
-          limited_followers.attrs[:users].each do |follower|
-            Follower.where(user_id: current_user.id, username: follower[:screen_name]).first_or_create
-          end
-          cursor = limited_followers.attrs[:next_cursor]
-        rescue Twitter::Error::TooManyRequests => error
-          sleep error.rate_limit.reset_in + 1
-          retry
-        end
       end
     end
 

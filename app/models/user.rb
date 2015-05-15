@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
-
+  extend FriendlyId
+  friendly_id :username, use: :slugged
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
@@ -11,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :followers
   has_many :unfollowers
   has_many :requests
+  has_one :identity
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -38,6 +40,7 @@ class User < ActiveRecord::Base
         user = User.new(
           name: auth.extra.raw_info.name,
           username: auth.info.nickname || auth.uid,
+          description: auth.info.description,
           access_token: auth.credentials.token,
           access_token_secret: auth.credentials.secret,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
@@ -45,6 +48,14 @@ class User < ActiveRecord::Base
         )
 
         user.save!
+
+        extra = Extra.new(
+          profile_image_url: auth.extra.raw_info.profile_image_url,
+          followers_count: auth.extra.raw_info.followers_count,
+          favourites_count: auth.extra.raw_info.favourites_count
+        )
+        extra.user = user
+        extra.save!
       end
     end
 

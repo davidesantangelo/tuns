@@ -2,11 +2,60 @@
 @import bootstrap
 @import font-awesome
 
+html
+  position: relative
+  min-height: 100%
+
 body
-  width: 100%
-  height: 100%
   font-family: 'Lato', sans-seri
   font-size: 17px
   background: #f0f0f0
   margin: 0 0 2em 0
   line-height: 1.6
+  
+body
+  margin-bottom: 40px
+  .container
+    .wrapper
+      margin: 3em auto 1em auto
+
+.footer 
+  position: absolute
+  bottom: 0
+  width: 100%
+  /* Set the fixed height of the footer here */
+  height: 40px
+  text-align: center
+
+section
+  text-align: center
+
+  h1
+    font-size: 3em
+    color: #141414
+    font-weight: 300
+    line-height: 1.2
+
+  p
+    font-size: 1.1em
+
+.btn
+  border-radius: 0
+
+.btn-twitter
+  background: #3FAEEB
+  color: #fff
+
+.btn-twitter:hover 
+  color: #f0f0f0
+  background: #299ae5 
+
+.box 
+  -webkit-animation: panel-fade-up 0.4s ease
+  animation: panel-fade-up 0.4s ease
+  position: relative
+  background: #fff
+  padding: 18px
+  border-radius: 2px
+  border: 1px solid #e1e1e1
+  margin: 25px 0
