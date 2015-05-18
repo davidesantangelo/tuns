@@ -6,9 +6,10 @@ Rails.application.routes.draw do
 
   root 'static#index'
 
-  resources :users do
+  resources :users, :path => "/" do
     collection do 
       match ':id/complete' => 'users#complete', via: [:get, :patch], :as => :complete
+      match ':id/unfollowers' => 'users#unfollowers', via: [:get], :as => :unfollowers
     end
   end
 end

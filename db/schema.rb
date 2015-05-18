@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515153616) do
+ActiveRecord::Schema.define(version: 20150518133932) do
 
   create_table "extras", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
@@ -25,10 +25,15 @@ ActiveRecord::Schema.define(version: 20150515153616) do
   add_index "extras", ["user_id"], name: "index_extras_on_user_id", using: :btree
 
   create_table "followers", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "uid",        limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id",           limit: 4
+    t.string   "uid",               limit: 255
+    t.string   "username",          limit: 255
+    t.string   "name",              limit: 255
+    t.string   "description",       limit: 255
+    t.string   "profile_image_url", limit: 255
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.boolean  "updated",           limit: 1,   default: false
   end
 
   add_index "followers", ["user_id", "uid"], name: "index_followers_on_user_id_and_uid", unique: true, using: :btree
@@ -44,20 +49,16 @@ ActiveRecord::Schema.define(version: 20150515153616) do
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
-  create_table "requests", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "resource",   limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "requests", ["user_id"], name: "index_requests_on_user_id", using: :btree
-
   create_table "unfollowers", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "uid",        limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id",           limit: 4
+    t.string   "uid",               limit: 255
+    t.string   "username",          limit: 255
+    t.string   "name",              limit: 255
+    t.string   "description",       limit: 255
+    t.string   "profile_image_url", limit: 255
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.boolean  "updated",           limit: 1,   default: false
   end
 
   add_index "unfollowers", ["user_id", "uid"], name: "index_unfollowers_on_user_id_and_uid", unique: true, using: :btree
@@ -95,6 +96,5 @@ ActiveRecord::Schema.define(version: 20150515153616) do
   add_foreign_key "extras", "users"
   add_foreign_key "followers", "users"
   add_foreign_key "identities", "users"
-  add_foreign_key "requests", "users"
   add_foreign_key "unfollowers", "users"
 end

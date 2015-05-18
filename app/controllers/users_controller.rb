@@ -5,16 +5,18 @@ class UsersController < ApplicationController
   before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
 
 
-  # GET /users/:id.:format
+  # GET /:username.:format
   def show
-    @unfollowers = current_user.unfollowers
+    @unfollowers = current_user.unfollowers.where(updated: 1)
   end
 
-  # GET /users/:id/edit
-  def edit
+
+  # GET /:username/unfollowers.:format
+  def unfollowers
+    @unfollowers = current_user.unfollowers.where(updated: 1)
   end
 
-  # PATCH/PUT /users/:id.:format
+  # PATCH/PUT /:username.:format
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -28,7 +30,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET/PATCH /users/:id/complete
+  # GET/PATCH /:username/complete
   def complete
     if request.patch? && params[:user]
       if @user.update(user_params)
@@ -41,7 +43,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/:id.:format
+  # DELETE /:id.:format
   def destroy
     @user.destroy
     respond_to do |format|
@@ -49,16 +51,16 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
-  
+
   def set_user
     @user = User.friendly.find(params[:id])
   end
 
   def user_params
-    accessible = [ :name, :email, :username ]
-    accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+    accessible = [:name, :email, :username]
+    accessible << [:password, :password_confirmation] unless params[:user][:password].blank?
     params.require(:user).permit(accessible)
   end
 

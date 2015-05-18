@@ -1,8 +1,5 @@
-.inner-content.text-center
-  .c100.p0.big.center
-    span = @unfollowers.size
-    .slice
-      .bar
-      .fill
-  p 
+.inner-content.text-center.unfollowers-count
+  = link_to unfollowers_users_path(current_user)
+    .c100.p0.big.center
+      span = @unfollowers.size
 

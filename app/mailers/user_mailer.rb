@@ -1,10 +1,15 @@
 class UserMailer < ActionMailer::Base
   before_filter :set_attachments
-  default from: 'no-reply@tuns.it'
 
   layout 'mail'
 
-  def unfollower_notification
+  def unfollower(unfollower)
+  	@unfollower = unfollower
+  	@user = unfollower.user
+   	mail( from: "\"#{@unfollower.name} (via TUNS)\" <notify@tuns.it>" , 
+          to: "#{@user.name} <#{@user.email}>",
+   				subject: "TUNS -  #{@unfollower.name} (@#{@unfollower.username}) is now unfollowing you on Twitter!", 
+   				layout: "mail")
   end
 
   private
