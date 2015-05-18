@@ -17,7 +17,6 @@ class SyncWorker
     while cursor != 0 do
       begin
         limited_followers = twitter_client.follower_ids(cursor: cursor)
-        Request.create(user_id: user.id, resource: 'followers')
         limited_followers.attrs[:ids].each do |id|
           Follower.where(user_id: user.id, uid: id).first_or_create
         end

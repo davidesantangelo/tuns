@@ -7,8 +7,7 @@ class UsersController < ApplicationController
 
   # GET /users/:id.:format
   def show
-    current_user.followers
-    @twitter_client
+    @unfollowers = current_user.unfollowers
   end
 
   # GET /users/:id/edit
@@ -52,28 +51,24 @@ class UsersController < ApplicationController
   end
   
   private
-    def set_user
-      @user = User.friendly.find(params[:id])
-    end
+  
+  def set_user
+    @user = User.friendly.find(params[:id])
+  end
 
-    def user_params
-      accessible = [ :name, :email, :username ]
-      accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
-      params.require(:user).permit(accessible)
-    end
+  def user_params
+    accessible = [ :name, :email, :username ]
+    accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+    params.require(:user).permit(accessible)
+  end
 
-    def load_config
-      twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
-      @twitter_client = Twitter::REST::Client.new do |config|
-        config.consumer_key        = twitter_config['consumer_key']
-        config.consumer_secret     = twitter_config['consumer_secret']
-        config.access_token        = current_user.access_token
-        config.access_token_secret = current_user.access_token_secret
-      end
+  def load_config
+    twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
+    @twitter_client = Twitter::REST::Client.new do |config|
+      config.consumer_key        = twitter_config['consumer_key']
+      config.consumer_secret     = twitter_config['consumer_secret']
+      config.access_token        = current_user.access_token
+      config.access_token_secret = current_user.access_token_secret
     end
-
-    def valid_request?
-      # 15 requests per window per leveraged access token https://dev.twitter.com/rest/public/rate-limiting
-      current_user.requests.size <= 15 or (Time.now.to_i - current_user.requests.last.created_at.to_i) > 900
-    end
+  end
 end
