@@ -1,4 +1,4 @@
-every 20.minutes do
+every 15.minutes do
   rake "users:unfollowers"
 end
 

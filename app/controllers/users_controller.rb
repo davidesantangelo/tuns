@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :complete]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :complete, :loadmore]
   before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
 
   # GET /:username.:format
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   # GET /:username/unfollowers.:format
   def unfollowers
-    @unfollowers = current_user.unfollowers.where(updated: 1)
+    @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
     if @unfollowers.empty?
       respond_to do |format|
         format.html { redirect_to current_user }
@@ -37,9 +37,10 @@ class UsersController < ApplicationController
   def complete
     if request.patch? && params[:user]
       if @user.update(user_params)
+        # load all followers uid
         SyncWorker.perform_async(current_user.id)
         sign_in(@user, :bypass => true)
-        redirect_to @user, notice: 'Your profile was successfully updated.'
+        redirect_to @user, notice: 'Your profile was successfully activated.'
       else
         @show_errors = true
       end
@@ -52,6 +53,14 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_url }
       format.json { head :no_content }
+    end
+  end
+
+  def loadmore
+    @stop_loading = false
+    @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
+    if @unfollowers.last and current_user.unfollowers.where(updated: 1).last.id == @unfollowers.last.id
+      @stop_loading = true
     end
   end
 

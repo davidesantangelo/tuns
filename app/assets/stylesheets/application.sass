@@ -18,11 +18,17 @@ body
   .container
     .wrapper
       margin: 2em auto 1em auto
+    section
+      text-align: center
+
 a 
   color: #3FAEEB
 
 a:hover
   text-decoration: none
+
+h2
+  margin-bottom: 20px
 
 .footer 
   position: absolute
@@ -32,20 +38,45 @@ a:hover
   height: 40px
   text-align: center
 
-section
+.btn 
+  -webkit-transition: background .2s, border .2s
+  transition: background .2s, border .2s
   text-align: center
-
-  h1
-    font-size: 3em
-    color: #141414
-    font-weight: 300
-    line-height: 1.2
-
-  p
-    font-size: 1.1em
-
-.btn
+  text-decoration: none
+  outline: 0
+  vertical-align: top
+  display: inline-block
   border-radius: 0
+
+.btn:hover 
+  background: rgba(47, 151, 121, .4)
+
+.btn:focus 
+  outline: 0
+  -webkit-transition: background .1s, border .1s, -webkit-transform .1s
+  transition: background .1s, border .1s, transform .1s
+  background: rgba(47, 151, 121, .1)
+  border: 2px solid rgba(47, 151, 121, .7)
+  -webkit-transform: scale(0.99, .99)
+  -ms-transform: scale(0.99, .99)
+  transform: scale(0.99, .99)
+
+.btn::-moz-focus-inner 
+  border: 0
+  padding: 0
+
+.btn-secondary 
+  color: #04203e
+  background: 0 0
+  border-color: #c3c9d0
+
+.btn-secondary:hover 
+  background-color: rgba(0, 0, 0, .015)
+  border-color: #929EAC
+
+.btn-secondary:focus 
+  background-color: rgba(255, 255, 255, .5)
+  border-color: #a6afba
 
 .btn-twitter
   margin: 0 auto
@@ -57,7 +88,8 @@ section
   color: #f0f0f0
   background: #299ae5 
 
-.back 
+.close 
+  font-size: 28px !important
   position: fixed
   top: 15px
   right: 15px
@@ -65,16 +97,6 @@ section
 .text 
   margin-top: 10px
   color: #3FAEEB
-
-.box 
-  -webkit-animation: panel-fade-up 0.4s ease
-  animation: panel-fade-up 0.4s ease
-  position: relative
-  background: #fff
-  padding: 18px
-  border-radius: 2px
-  border: 1px solid #e1e1e1
-  margin: 25px 0
 
 .unfollowers-count 
   width: 300px
@@ -88,16 +110,17 @@ section
   text-align: center
 
 .unfollower
+  position: relative
   background: #fff
-  padding: 18px
+  padding: 15px
   -webkit-transition: all .3s ease
   -moz-transition: all .3s ease
   transition: all .3s ease
-  height: 200px
+  height: 210px
   margin-bottom: 20px
 
-  h2 
-    color: #6FCBDD
+  h3 
+    color: #444
     margin: 0 0
 
   span 
@@ -106,10 +129,48 @@ section
   .description
     margin-top: 10px
     color: #555
-    font-size: 0.9em
+    font-size: 0.8em
+  
+  .date
+    font-size: 0.8em
+    position: absolute
+    right: 15px
+    bottom: 15px
+
+  .profile_img
+    position: absolute
+    right: 15px
+    top: 15px
+    width: 48px
+    height: 48px
 
 .unfollower:hover
   background: #fbfbfb
 
+.pace 
+  -webkit-pointer-events: none
+  pointer-events: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  user-select: none
 
+.pace-inactive 
+  display: none
+
+.pace .pace-progress 
+  background: #29d
+  position: fixed
+  z-index: 2000
+  top: 0
+  right: 100%
+  width: 100%
+  height: 2px
+
+#loadmore
+  cursor: pointer
+  z-index: 999
+  color: #aaa
+  font-size: 20px
+  text-align: center
+  margin-top: 10px
 

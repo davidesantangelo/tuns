@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     collection do 
       match ':id/complete' => 'users#complete', via: [:get, :patch], :as => :complete
       match ':id/unfollowers' => 'users#unfollowers', via: [:get], :as => :unfollowers
+      match ':id/loadmore' => 'users#loadmore', via: [:get]
     end
   end
 end

@@ -31,12 +31,14 @@ namespace :users do
       new_elements, deleted_elements = comparelist(old_followers, new_followers)
 
       deleted_elements.each do |deleted_uid|
-        Follower.where(user_id: user.id, uid: deleted_uid).destroy_all
+        # move the follower to the unfollowers table
+        Follower.where(user_id: user.id, uid: deleted_uid).first.destroy
         Unfollower.where(user_id: user.id, uid: deleted_uid).first_or_create
       end
 
       new_elements.each do |new_uid|
-        Unfollower.where(user_id: user.id, uid: new_uid).destroy_all
+        # move the unfollower to the followers table
+        Unfollower.where(user_id: user.id, uid: new_uid).first.destroy
         Follower.where(user_id: user.id, uid: new_uid).first_or_create
       end
     end

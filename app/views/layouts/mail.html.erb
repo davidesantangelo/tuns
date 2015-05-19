@@ -117,7 +117,7 @@
   h1, h2, h3 {
     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     color: #000;
-    margin: 40px 0 10px;
+    margin: 0;
     line-height: 1.2;
     font-weight: 200;
   }
@@ -142,6 +142,11 @@
     margin-left: 5px;
     list-style-position: inside;
   }
+  
+  span {
+    color: #3FAEEB;
+    font-size: 20px;
+  }
 
   /* ---------------------------------------------------
           RESPONSIVENESS
@@ -150,10 +155,10 @@
 
   /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
   .container {
-    display: block!important;
-    max-width: 600px!important;
-    margin: 0 auto!important; /* makes it centered */
-    clear: both!important;
+    display: block !important;
+    max-width: 600px !important;
+    margin: 0 auto !important; /* makes it centered */
+    clear: both !important;
   }
 
   /* Set the padding on the td rather than the div for Outlook compatibility */
@@ -187,10 +192,7 @@
         <table>
           <tr>
             <td>
-              <p>Hi there,</p>
-              <p>Sometimes all you want is to send a simple HTML email with a basic design.</p>
-              <h1>Really simple HTML email template</h1>
-              <p>This is a really simple email template. Its sole purpose is to get you to click the button below.</p>
+              <%= yield %>
             </td>
           </tr>
         </table>
@@ -212,7 +214,7 @@
         <table>
           <tr>
             <td align="center">
-              <p>Don't like these annoying emails? <a href="#"><unsubscribe>Unsubscribe</unsubscribe></a>.</p>
+              <p>TUNS - made by <a href="https://www.twitter.com/daviducolo">@daviducolo</a></p>
             </td>
           </tr>
         </table>

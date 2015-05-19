@@ -41,7 +41,9 @@ gem 'friendly_id', '~> 5.1.0'
 # SideKiq
 gem 'sidekiq'
 gem 'sinatra', :require => nil
+
 gem 'whenever', :require => false
+gem 'will_paginate', '~> 3.0.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,7 @@
+| $('.list-unfollowers').append('
+= escape_javascript(render(partial: "unfollowers", locals: { :@unfollowers => @unfollowers }))
+| ');
+
+- if @stop_loading
+  | window.finished = true;
+  | $('#loadmore').hide();
