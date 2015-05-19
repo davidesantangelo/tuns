@@ -8,6 +8,6 @@ section.top
 br/
 .row
   .col-md-4.col-md-offset-4
-	  = button_to omniauth_authorize_path(User.new, 'twitter', signin: true), id: "twitter-login", :class=>"btn btn-lg btn-twitter btn-block" do
+	  = button_to omniauth_authorize_path(User.new, 'twitter', signin: true), id: "twitter-login", :class=>"btn btn-lg btn-twitter btn-block"
 		  i.fa.fa-twitter
 		    |  Continue With Twitter  

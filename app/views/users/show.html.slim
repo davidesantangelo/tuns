@@ -1,5 +1,16 @@
 .inner-content.text-center.unfollowers-count
   = link_to unfollowers_users_path(current_user)
-    .c100.p0.big.center
+    .c100.big.center
       span = @unfollowers.size
+      .slice
+		    .bar
+		    .fill
 
+javascript:
+  $('.c100').hover(
+	  function() {
+	    $( this ).addClass("p100").delay(800);
+	  }, function() {
+	    $( this ).removeClass("p100");
+	  }
+	);

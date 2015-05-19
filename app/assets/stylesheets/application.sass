@@ -17,7 +17,12 @@ body
   margin-bottom: 40px
   .container
     .wrapper
-      margin: 3em auto 1em auto
+      margin: 2em auto 1em auto
+a 
+  color: #3FAEEB
+
+a:hover
+  text-decoration: none
 
 .footer 
   position: absolute
@@ -43,12 +48,23 @@ section
   border-radius: 0
 
 .btn-twitter
+  margin: 0 auto
+  max-width: 240px
   background: #3FAEEB
   color: #fff
 
 .btn-twitter:hover 
   color: #f0f0f0
   background: #299ae5 
+
+.back 
+  position: fixed
+  top: 15px
+  right: 15px
+
+.text 
+  margin-top: 10px
+  color: #3FAEEB
 
 .box 
   -webkit-animation: panel-fade-up 0.4s ease
@@ -74,3 +90,26 @@ section
 .unfollower
   background: #fff
   padding: 18px
+  -webkit-transition: all .3s ease
+  -moz-transition: all .3s ease
+  transition: all .3s ease
+  height: 200px
+  margin-bottom: 20px
+
+  h2 
+    color: #6FCBDD
+    margin: 0 0
+
+  span 
+    font-size: 0.9em
+
+  .description
+    margin-top: 10px
+    color: #555
+    font-size: 0.9em
+
+.unfollower:hover
+  background: #fbfbfb
+
+
+

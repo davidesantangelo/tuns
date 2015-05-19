@@ -1,19 +1,22 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :complete]
-  before_action :load_config
   before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
-
 
   # GET /:username.:format
   def show
     @unfollowers = current_user.unfollowers.where(updated: 1)
   end
 
-
   # GET /:username/unfollowers.:format
   def unfollowers
     @unfollowers = current_user.unfollowers.where(updated: 1)
+    if @unfollowers.empty?
+      respond_to do |format|
+        format.html { redirect_to current_user }
+        format.json { head :no_content }
+      end
+    end
   end
 
   # PATCH/PUT /:username.:format
@@ -62,15 +65,5 @@ class UsersController < ApplicationController
     accessible = [:name, :email, :username]
     accessible << [:password, :password_confirmation] unless params[:user][:password].blank?
     params.require(:user).permit(accessible)
-  end
-
-  def load_config
-    twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
-    @twitter_client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = twitter_config['consumer_key']
-      config.consumer_secret     = twitter_config['consumer_secret']
-      config.access_token        = current_user.access_token
-      config.access_token_secret = current_user.access_token_secret
-    end
   end
 end

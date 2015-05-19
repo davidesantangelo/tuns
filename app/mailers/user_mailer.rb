@@ -8,7 +8,7 @@ class UserMailer < ActionMailer::Base
   	@user = unfollower.user
    	mail( from: "\"#{@unfollower.name} (via TUNS)\" <notify@tuns.it>" , 
           to: "#{@user.name} <#{@user.email}>",
-   				subject: "TUNS -  #{@unfollower.name} (@#{@unfollower.username}) is now unfollowing you on Twitter!", 
+   				subject: "#{@unfollower.name} (@#{@unfollower.username}) is now unfollowing you on Twitter!", 
    				layout: "mail")
   end
 

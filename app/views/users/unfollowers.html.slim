@@ -1,5 +1,10 @@
 .row
 	- @unfollowers.each do |unfollower|
 	  .col-md-4
-	    .unfollower
+	    = link_to "https://twitter.com/#{unfollower.username}", target: "_blank"
+		    .unfollower
+		      h2 = unfollower.name
+		      span = "@#{unfollower.username}"
+		      .description
+		         = unfollower.description
 				
