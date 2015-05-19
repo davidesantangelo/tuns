@@ -14,18 +14,9 @@ javascript:
 
   $('#loadmore').click(function(e) {
     page++;
-
     var request= $.ajax({
       url: "loadmore?page=" + page,
       type: 'get',
       dataType: 'script'
-    });
-
-    request.done(function() {
-      return;
-    });
-
-    request.fail(function() {
-
     });
   });			

@@ -56,6 +56,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /:id/loadmore
   def loadmore
     @stop_loading = false
     @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])

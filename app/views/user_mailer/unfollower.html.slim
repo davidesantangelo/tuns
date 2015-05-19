@@ -1,5 +1,10 @@
-
-h1 = @unfollower.name
+h3
+  strong
+    = @user.name
+span You have new unfollower on Twitter
+hr/
+h1 
+  = @unfollower.name
 span = "@#{@unfollower.username}"
 br/
 br/
