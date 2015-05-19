@@ -13,6 +13,9 @@
 # Ignore config twitter.yml
 /config/twitter.yml
 
+# Ignore config secrets.yml
+/config/secrets.yml
+
 # Ignore enviroments  config
 /config/enviroments/.*
 
