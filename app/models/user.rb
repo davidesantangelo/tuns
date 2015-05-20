@@ -58,6 +58,8 @@ class User < ActiveRecord::Base
         extra.user = user
         extra.save!
       end
+    else
+      user.extra.update_attributes(profile_image_url: auth.extra.raw_info.profile_image_url, followers_count: auth.extra.raw_info.followers_count, favourites_count: auth.extra.raw_info.favourites_count)
     end
 
     # Associate the identity with the user if needed

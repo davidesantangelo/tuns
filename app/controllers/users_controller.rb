@@ -1,22 +1,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :complete, :loadmore]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :complete]
   before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
 
   # GET /:username.:format
   def show
-    @unfollowers = current_user.unfollowers.where(updated: 1)
-  end
-
-  # GET /:username/unfollowers.:format
-  def unfollowers
     @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
-    if @unfollowers.empty?
-      respond_to do |format|
-        format.html { redirect_to current_user }
-        format.json { head :no_content }
-      end
-    end
   end
 
   # PATCH/PUT /:username.:format

@@ -15,9 +15,10 @@ body
   
 body
   margin-bottom: 40px
+
   .container
     .wrapper
-      margin: 2em auto 1em auto
+      margin: 0.5em auto 2em auto
     section
       text-align: center
 
@@ -26,9 +27,6 @@ a
 
 a:hover
   text-decoration: none
-
-h2
-  margin-bottom: 20px
 
 
 .no-border-radius
@@ -41,6 +39,10 @@ h2
   /* Set the fixed height of the footer here */
   height: 40px
   text-align: center
+
+.land-image 
+  text-align: center
+  margin: 60px auto 40px auto
 
 .btn 
   -webkit-transition: background .2s, border .2s
@@ -89,16 +91,28 @@ h2
   margin-top: 10px
   color: #3FAEEB
 
-.unfollowers-count 
-  width: 300px
-  height: 300px
+.unfollowers-count
   position: fixed
   top: 0
-  bottom: 0
-  left: 0
   right: 0
+  left: 0
+  bottom: 0
+  width: 300px
+  height: 300px
   margin: auto
+
+.user-box
+  background: #fff 
+  margin: 50px auto 20px auto
   text-align: center
+  padding: 25px
+  border: 1px solid #e9e9e9
+
+  .user-info
+    margin-bottom: 40px
+  
+    h2
+      margin: 0
 
 .unfollower
   position: relative
@@ -107,7 +121,7 @@ h2
   -webkit-transition: all .3s ease
   -moz-transition: all .3s ease
   transition: all .3s ease
-  height: 210px
+  height: 200px
   margin-bottom: 20px
 
   h3 
@@ -165,3 +179,12 @@ h2
   text-align: center
   margin-top: 10px
 
+.navbar-default
+  background: none
+  padding: 8px 0
+  
+
+.navbar-brand
+  font-weight: 300
+  letter-spacing: 1px
+  color: #3FAEEB !important

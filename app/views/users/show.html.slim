@@ -1,16 +1,27 @@
-.inner-content.text-center.unfollowers-count
-  = link_to unfollowers_users_path(current_user)
-    .c100.big.center
-      span = @unfollowers.size
-      .slice
-		    .bar
-		    .fill
+
+.list-unfollowers
+  - if @unfollowers.empty?
+    .inner-content.text-center.unfollowers-count
+    	.c100.big.center
+				span 0
+				.slice
+
+
+  = render partial: 'unfollowers'
+
+- if @unfollowers.total_entries > WillPaginate.per_page 
+	#loadmore
+	  a.btn.btn-secondary Load More
 
 javascript:
-  $('.c100').hover(
-	  function() {
-	    $( this ).addClass("p100").delay(800);
-	  }, function() {
-	    $( this ).removeClass("p100");
-	  }
-	);
+  window.finished = false;
+  var page = 1;
+
+  $('#loadmore').click(function(e) {
+    page++;
+    var request= $.ajax({
+      url: "loadmore?page=" + page,
+      type: 'get',
+      dataType: 'script'
+    });
+  });			
