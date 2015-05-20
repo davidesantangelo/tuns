@@ -21,7 +21,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(resource)
     if resource.email_verified?
-      super resource
+      resource
     else
       complete_users_path(resource)
     end

@@ -1,0 +1,13 @@
+.row
+	- @unfollowers.each do |unfollower|
+	  .col-md-4
+	    = link_to "https://twitter.com/#{unfollower.username}", target: "_blank"
+		    .unfollower
+		      h3 = unfollower.name
+		      span = "@#{unfollower.username}"
+		      .profile_img
+		        = image_tag unfollower.profile_image_url, class: 'img-circle img-responsive'
+		      .description
+		         = unfollower.description
+		      .date
+		      	 = unfollower.created_at.day == Time.now.day ? 'Today' : unfollower.created_at.strftime("%b %e")

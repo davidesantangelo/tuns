@@ -3,20 +3,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :complete]
   before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
 
-
-  # GET /users/:id.:format
+  # GET /:username.:format
   def show
-    # authorize! :read, @user
+    @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
   end
 
-  # GET /users/:id/edit
-  def edit
-    # authorize! :update, @user
-  end
-
-  # PATCH/PUT /users/:id.:format
+  # PATCH/PUT /:username.:format
   def update
-    # authorize! :update, @user
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user == current_user ? @user : current_user, :bypass => true)
@@ -29,38 +22,47 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET/PATCH /users/:id/complete
+  # GET/PATCH /:username/complete
   def complete
-    # authorize! :update, @user 
-    if request.patch? && params[:user] #&& params[:user][:email]
+    if request.patch? && params[:user]
       if @user.update(user_params)
-        @user.skip_reconfirmation!
+        # load all followers uid
+        SyncWorker.perform_async(current_user.id)
         sign_in(@user, :bypass => true)
-        redirect_to @user, notice: 'Your profile was successfully updated.'
+        redirect_to @user, notice: 'Your profile was successfully activated.'
       else
-        @show_errors = true
+        flash[:error] = "Unable to complete signup due: #{@user.errors.full_messages.to_sentence}"
       end
     end
   end
 
-  # DELETE /users/:id.:format
+  # DELETE /:id.:format
   def destroy
-    # authorize! :delete, @user
     @user.destroy
     respond_to do |format|
       format.html { redirect_to root_url }
       format.json { head :no_content }
     end
   end
-  
-  private
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    def user_params
-      accessible = [ :name, :email ] # extend with your own params
-      accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
-      params.require(:user).permit(accessible)
+  # GET /:id/loadmore
+  def loadmore
+    @stop_loading = false
+    @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
+    if @unfollowers.last and current_user.unfollowers.where(updated: 1).last.id == @unfollowers.last.id
+      @stop_loading = true
     end
+  end
+
+  private
+
+  def set_user
+    @user = User.friendly.find(params[:id])
+  end
+
+  def user_params
+    accessible = [:name, :email, :username]
+    accessible << [:password, :password_confirmation] unless params[:user][:password].blank?
+    params.require(:user).permit(accessible)
+  end
 end

@@ -34,7 +34,16 @@ gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.4'
 # Font-Awesome
 gem 'font-awesome-rails'
+# A Ruby interface to the Twitter API.
+gem 'twitter'
+# FriendlyId
+gem 'friendly_id', '~> 5.1.0' 
+# SideKiq
+gem 'sidekiq'
+gem 'sinatra', :require => nil
 
+gem 'whenever', :require => false
+gem 'will_paginate', '~> 3.0.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -45,5 +54,6 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'foreman'
 end
 

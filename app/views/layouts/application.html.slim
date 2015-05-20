@@ -1,9 +1,11 @@
 doctype html
 html
   head
+    meta charset="UTF-8"
   	title TUNS - Twitter Unfollower Notification Service
     = stylesheet_link_tag    'normalize', media: 'all', 'data-turbolinks-track' => true
   	= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'circle', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true 
   	= csrf_meta_tags 
     = favicon_link_tag 'favicon.ico'
@@ -11,14 +13,51 @@ html
   	link href="http://fonts.googleapis.com/css?family=Lato:100,300,700" rel="stylesheet" type="text/css"
   	meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     
-    meta name="description" content=""
-    meta name="keywords" content=""
+    meta name="description" content="Twitter Unfollower Notification Service. With TUNS you can keep track of your twitter unfollower."
+    meta name="keywords" content="twitter, follow, unfollow, notify, davide santangelo"
 
     /![if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]
       
 	body
+    .alert-box
+     - flash.each do |name, msg|
+      - if not msg.blank?
+        = content_tag :div, class: "#{flash_class(name.to_s)}"
+          = msg
+
+    - if params[:action] == 'index'
+      a href="https://github.com/davidesantangelo/tuns"
+        img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+    
+    - if user_signed_in? and params[:action]== 'show'
+      nav.navbar.navbar-default
+        .container
+          .navbar-header
+            button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button" 
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            = link_to "TUNS (#{current_user.unfollowers.size})", user_path(current_user), class: 'navbar-brand'  
+          #navbar.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              li
+                = link_to "@#{current_user.username}", edit_user_path(current_user)
+              li
+                = link_to "log out", destroy_user_session_path, method: :delete 
+          /! /.nav-collapse
     .container
       .wrapper
         .row
-          .col-md-8.col-md-offset-2.col-sm-8.col-sm-offset-2.text-justify        
+          .col-md-12.col-md-offset-0.col-sm-8.col-sm-offset-2.text-justify        
 	          == yield
+  footer.footer
+    .container
+      p.text-muted 
+        | Made by 
+        a href="https://twitter.com/daviducolo" 
+          | @daviducolo
+
+javascript:
+  $('.alert').delay(5000).fadeOut(2000);
+

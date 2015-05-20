@@ -2,11 +2,202 @@
 @import bootstrap
 @import font-awesome
 
+html
+  position: relative
+  min-height: 100%
+
 body
-  width: 100%
-  height: 100%
   font-family: 'Lato', sans-seri
   font-size: 17px
   background: #f0f0f0
   margin: 0 0 2em 0
   line-height: 1.6
+  
+body
+  margin-bottom: 40px
+
+  .container
+    .wrapper
+      margin: 1em auto 1em auto
+    section
+      text-align: center
+
+a 
+  color: #3FAEEB
+
+a:hover
+  text-decoration: none
+
+.alert-box
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+  text-align: center
+  z-index: 999999
+  width: 100%
+
+  .alert
+    border-radius: 0
+
+.center
+  height: 200px
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  margin: auto
+
+.no-border-radius
+  border-radius: 0
+
+.footer 
+  position: absolute
+  bottom: 0
+  width: 100%
+  /* Set the fixed height of the footer here */
+  height: 40px
+  text-align: center
+
+.land-image 
+  text-align: center
+  margin: 40px auto
+
+.btn 
+  -webkit-transition: background .2s, border .2s
+  transition: background .2s, border .2s
+  text-align: center
+  text-decoration: none
+  outline: 0
+  vertical-align: top
+  display: inline-block
+  border-radius: 0
+
+.btn::-moz-focus-inner 
+  border: 0
+  padding: 0
+
+.btn-secondary 
+  color: #04203e
+  background: 0 0
+  border-color: #c3c9d0
+
+.btn-secondary:hover 
+  background-color: rgba(0, 0, 0, .015)
+  border-color: #929EAC
+
+.btn-secondary:focus 
+  background-color: rgba(255, 255, 255, .5)
+  border-color: #a6afba
+
+.btn-twitter
+  margin: 0 auto
+  max-width: 240px
+  background: #3FAEEB
+  color: #fff
+
+.btn-twitter:hover 
+  color: #f0f0f0
+  background: #299ae5 
+
+.close 
+  font-size: 28px !important
+  position: fixed
+  top: 15px
+  right: 15px
+
+.text 
+  margin-top: 10px
+  color: #3FAEEB
+
+.user-box
+  background: #fff 
+  margin: 50px auto 20px auto
+  text-align: center
+  padding: 25px
+  border: 1px solid #e9e9e9
+
+  .user-info
+    margin-bottom: 40px
+  
+    h2
+      margin: 0
+      
+.unfollower
+  position: relative
+  background: #fff
+  padding: 15px
+  -webkit-transition: all .3s ease
+  -moz-transition: all .3s ease
+  transition: all .3s ease
+  height: 200px
+  margin-bottom: 20px
+
+  h3 
+    color: #444
+    margin: 0 0
+
+  span 
+    font-size: 0.9em
+
+  .description
+    margin-top: 10px
+    color: #555
+    font-size: 0.8em
+  
+  .date
+    font-size: 0.8em
+    position: absolute
+    right: 15px
+    bottom: 15px
+
+  .profile_img
+    position: absolute
+    right: 15px
+    top: 15px
+    width: 48px
+    height: 48px
+
+.unfollower:hover
+  background: #fbfbfb
+
+.pace 
+  -webkit-pointer-events: none
+  pointer-events: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  user-select: none
+
+.pace-inactive 
+  display: none
+
+.pace .pace-progress 
+  background: #29d
+  position: fixed
+  z-index: 2000
+  top: 0
+  right: 100%
+  width: 100%
+  height: 2px
+
+#loadmore
+  cursor: pointer
+  z-index: 999
+  color: #aaa
+  font-size: 20px
+  text-align: center
+  margin-top: 10px
+
+.navbar-default
+  background: none
+  padding: 8px 0
+  border: 0
+  border-bottom: 1px solid #f5f5f5
+  margin-bottom: 10px
+  
+
+.navbar-brand
+  font-weight: 300
+  letter-spacing: 1px
+  color: #3FAEEB !important
