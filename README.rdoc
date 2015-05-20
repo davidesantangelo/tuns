@@ -1,11 +1,11 @@
-# TUNS
+== TUNS
 Twitter Unfollower Notification Service. With TUNS you can keep track of your twitter unfollower."
 
-## License
+== License
 TUNS app is released under the MIT License.
 
 
-## Contributing
+== Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/tuns/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
