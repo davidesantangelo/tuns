@@ -10,4 +10,4 @@
 		      .description
 		         = unfollower.description
 		      .date
-		      	 = unfollower.created_at.strftime("%b %e, %l:%M %p") 
+		      	 = unfollower.created_at.day == Time.now.day ? 'Today' : unfollower.created_at.strftime("%b %e")

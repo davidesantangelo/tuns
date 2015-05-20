@@ -1,9 +1,8 @@
-h3
-  strong
-    = @user.name
-| You have new unfollower on Twitter
+span style="font-size: 20px; font-weight: bold; color: #333; display: block"
+  = @user.name
+span style="font-size: 14px; color: #444;" You have new unfollower on Twitter
 hr/
-h1 
+h2 
   = @unfollower.name
 span = "@#{@unfollower.username}"
 br/

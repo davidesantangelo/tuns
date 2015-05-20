@@ -31,7 +31,7 @@ class UsersController < ApplicationController
         sign_in(@user, :bypass => true)
         redirect_to @user, notice: 'Your profile was successfully activated.'
       else
-        @show_errors = true
+        flash[:error] = "Unable to complete signup due: #{@user.errors.full_messages.to_sentence}"
       end
     end
   end
