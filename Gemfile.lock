@@ -73,9 +73,6 @@ GEM
       warden (~> 1.2.3)
     equalizer (0.0.11)
     erubis (2.7.0)
-    exception_notification (4.0.1)
-      actionmailer (>= 3.0.4)
-      activesupport (>= 3.0.4)
     execjs (2.5.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
@@ -243,7 +240,6 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
-  exception_notification (~> 4.0.1)
   font-awesome-rails
   foreman
   friendly_id (~> 5.1.0)
