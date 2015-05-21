@@ -16,8 +16,10 @@
 # Ignore config secrets.yml
 /config/secrets.yml
 
-# Ignore enviroments  config
-/config/environments/.*
+# Ignore enviroments config
+/config/environments/development.rb
+/config/environments/production.rb
+
 
 # Ignore bundler config.
 /.bundle
