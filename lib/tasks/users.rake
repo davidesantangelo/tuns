@@ -38,8 +38,17 @@ namespace :users do
 
       new_elements.each do |new_uid|
         # move the unfollower to the followers table
-        Unfollower.where(user_id: user.id, uid: new_uid).destroy_all
-        Follower.where(user_id: user.id, uid: new_uid).first_or_create
+        unfollowers = Unfollower.where(user_id: user.id, uid: new_uid)
+        followers = Follower.where(user_id: user.id, uid: new_uid)
+        followers.first_or_create
+
+        if not unfollowers.empty?
+          unfollowers.destroy_all
+          follower = followers.first
+          user = twitter_client.user(new_uid.to_i)
+          follower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
+          UserMailer.follower(follower).deliver_now
+        end
       end
     end
   end

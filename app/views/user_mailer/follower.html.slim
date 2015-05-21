@@ -1,14 +1,14 @@
 span style="font-size: 20px; color: #333; display: block"
   = @user.name
 span style="font-size: 14px; color: #444;" 
-	= @unfollower.name
+	= @follower.name
 	|  has just 
-	strong unfollowed 
-	| you on Twitter!
+	strong returned 
+	| to follow you on Twitter!
 hr/
 h3 
-  = @unfollower.name
-span = "@#{@unfollower.username}"
+  = @follower.name
+span = "@#{@follower.username}"
 br/
 br/
-p = @unfollower.description
+p = @follower.description
