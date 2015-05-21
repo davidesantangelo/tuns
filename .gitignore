@@ -17,7 +17,7 @@
 /config/secrets.yml
 
 # Ignore enviroments  config
-/config/enviroments/.*
+/config/environments/.*
 
 # Ignore bundler config.
 /.bundle
