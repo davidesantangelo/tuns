@@ -1,3 +1,10 @@
+require 'sidekiq'
+require 'sidekiq/web'
+
+Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
+  [user, password] == ["youruser", "yourpassword"]
+end
+
 Sidekiq.configure_server do |config|
   size = Sidekiq.options[:concurrency]
   
