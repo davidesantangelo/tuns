@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }, :skip => [:registrations]
 
   root 'static#index'
-  
+  get '/about' => 'static#about', :as => :about
+
   resources :users, :path => "/" do
     collection do 
       match ':id/complete' => 'users#complete', via: [:get, :patch], :as => :complete
