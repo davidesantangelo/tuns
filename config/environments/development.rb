@@ -45,7 +45,7 @@ Rails.application.configure do
     :port      => 587, # or 587
     :enable_starttls_auto => true, # detects and uses STARTTLS
     :user_name => "davide.santangelo@gmail.com",
-    :password  => "VOkhdTkNZH06EtuOooy_vg",
+    :password  => "Camnvn1slGV6zzeZ0yBN5Q",
     :authentication => 'login' # Mandrill supports 'plain' or 'login'
   }  
 end
