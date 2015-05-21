@@ -1,10 +1,13 @@
-.row
-  .col-md-6.col-md-offset-3.center
-    = form_for(current_user, :as => 'user', :url => complete_users_path(current_user), :html => { role: 'form'}) do |f| 
-      .form-group
-        = f.label :email
-        .controls
-          = f.text_field :email, :autofocus => true, :value => '', class: 'form-control input-lg no-border-radius', placeholder: 'Example: email@me.com', required: true
-          p.help-block Please confirm your email address. No spam.
-      .actions
-        = f.submit 'Continue', :class => 'btn btn-primary'
+.page-wrapper
+	.row
+	  .col-md-6.col-md-offset-3
+	  	h2
+	  		| Complete Sign Up
+	  	br
+	    = form_for(current_user, :as => 'user', :url => complete_users_path(current_user), :html => { role: 'form'}) do |f| 
+	      .form-group
+	        .controls
+	          = f.text_field :email, :autofocus => true, :value => '', class: 'form-control input-lg no-border-radius', placeholder: 'Example: email@me.com', required: true
+	          p.help-block Please confirm your email address. No spam.
+	      .actions
+	        = f.submit 'Continue', class: 'btn btn-success'

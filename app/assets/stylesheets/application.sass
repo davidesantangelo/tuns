@@ -1,6 +1,7 @@
 @import bootstrap-sprockets
 @import bootstrap
 @import font-awesome
+@import button
 
 html
   position: relative
@@ -19,6 +20,8 @@ body
   .container
     .wrapper
       margin: 1em auto 1em auto
+    .page-wrapper
+      margin: 3em auto 3em auto
     section
       text-align: center
 
@@ -28,14 +31,93 @@ a
 a:hover
   text-decoration: none
 
+
+input[type="search"],
+input[type="text"],
+input[type="password"] 
+  display: block
+  height: 40px
+  width: 100%
+  padding: 0
+  border: px solid #e5e5e5
+  border-radius: 2px
+  outline: none
+  box-sizing: border-box
+  -webkit-appearance: none
+  font: 16px 'Source Sans Pro', sans-serif
+  text-indent: 10px
+  font-weight: 400
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  vertical-align: bottom
+  position: relative
+
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus 
+  border-color: #CACACA
+
+
+textarea 
+  resize: none !important
+  display: block
+  width: 100%
+  padding: 10px 10px 0 10px
+  border: px solid #e5e5e5
+  border-radius: 2px
+  outline: none
+  box-sizing: border-box
+  -webkit-appearance: none
+  resize: vertical
+  font: 16px 'Source Sans Pro', sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  margin: 0 auto
+
+
+textarea:focus 
+  border-color: #CACACA
+
+
+textarea.url::-webkit-input-placeholder 
+  color: #000
+
+
+textarea.url:-moz-placeholder 
+  color: #000
+
+
+textarea.url:-ms-input-placeholder 
+  color: #000
+
+
+\::-webkit-input-placeholder 
+  color: #A0A0A0
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+
+\:-moz-placeholder 
+  color: #A0A0A0
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+
+\\:-ms-input-placeholder 
+  color: #A0A0A0
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+
 .alert-box
   position: fixed
   top: 0
   right: 0
   left: 0
   text-align: center
-  z-index: 999999
+  z-index: 99
   width: 100%
+
 
   .alert
     border-radius: 0
@@ -63,43 +145,6 @@ a:hover
 .land-image 
   text-align: center
   margin: 40px auto
-
-.btn 
-  -webkit-transition: background .2s, border .2s
-  transition: background .2s, border .2s
-  text-align: center
-  text-decoration: none
-  outline: 0
-  vertical-align: top
-  display: inline-block
-  border-radius: 0
-
-.btn::-moz-focus-inner 
-  border: 0
-  padding: 0
-
-.btn-secondary 
-  color: #04203e
-  background: 0 0
-  border-color: #c3c9d0
-
-.btn-secondary:hover 
-  background-color: rgba(0, 0, 0, .015)
-  border-color: #929EAC
-
-.btn-secondary:focus 
-  background-color: rgba(255, 255, 255, .5)
-  border-color: #a6afba
-
-.btn-twitter
-  margin: 0 auto
-  max-width: 240px
-  background: #3FAEEB
-  color: #fff
-
-.btn-twitter:hover 
-  color: #f0f0f0
-  background: #299ae5 
 
 .close 
   font-size: 28px !important
