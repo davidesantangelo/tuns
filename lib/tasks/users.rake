@@ -4,14 +4,7 @@ namespace :users do
     logger.info ("#{Time.now}: LOOKUP STARTED")
     Unfollower.where(updated: false).each do |unfollower|
       begin
-        twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
-        twitter_client = Twitter::REST::Client.new do |config|
-          config.consumer_key        = twitter_config['consumer_key']
-          config.consumer_secret     = twitter_config['consumer_secret']
-          config.access_token        = unfollower.user.access_token
-          config.access_token_secret = unfollower.user.access_token_secret
-        end
-
+        twitter_client = client(unfollower.user)
         user = twitter_client.user(unfollower.uid.to_i)
         unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
         UserMailer.unfollower(unfollower).deliver_now if unfollower.user.email_verified?
@@ -34,17 +27,10 @@ namespace :users do
     logger.info ("#{Time.now}: UNFOLLOWERS STARTED")
     User.all.each do |user|
       begin
-        twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
-        twitter_client = Twitter::REST::Client.new do |config|
-          config.consumer_key        = twitter_config['consumer_key']
-          config.consumer_secret     = twitter_config['consumer_secret']
-          config.access_token        = user.access_token
-          config.access_token_secret = user.access_token_secret
-        end
+        twitter_client = client(user)
 
         old_followers = user.followers.map(&:uid)
         new_followers = fetch_followers(twitter_client)
-
         new_elements, deleted_elements = comparelist(old_followers, new_followers)
 
         deleted_elements.each do |deleted_uid|
@@ -79,6 +65,16 @@ namespace :users do
       end
     end
     logger.info ("#{Time.now}: UNFOLLOWERS STOPPED")
+  end
+
+  def client(user)
+    twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
+    twitter_client = Twitter::REST::Client.new do |config|
+      config.consumer_key        = twitter_config['consumer_key']
+      config.consumer_secret     = twitter_config['consumer_secret']
+      config.access_token        = user.access_token
+      config.access_token_secret = user.access_token_secret
+    end
   end
 
   def comparelist(old_list, new_list)
