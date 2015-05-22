@@ -9,8 +9,11 @@
   = render partial: 'unfollowers'
 
 - if @unfollowers.total_entries > WillPaginate.per_page 
-	#loadmore
-	  a.btn.btn-secondary Load More
+  	#loadmore
+      a.btn.btn-secondary
+        i.fa.fa-angle-down.fa-lg
+
+
 
 javascript:
   window.finished = false;

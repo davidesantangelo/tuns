@@ -11,4 +11,9 @@ h3
 span = "@#{@unfollower.username}"
 br/
 br/
-p = @unfollower.description
+p.desc = @unfollower.description
+table
+  tr
+    td.padding
+      p
+        a.btn-primary href="http://tuns.it/#{@user.username}"  View on TUNS
