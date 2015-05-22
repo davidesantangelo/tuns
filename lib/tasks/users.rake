@@ -11,7 +11,7 @@ namespace :users do
 
       user = twitter_client.user(unfollower.uid.to_i)
       unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
-      UserMailer.unfollower(unfollower).deliver_now
+      UserMailer.unfollower(unfollower).deliver_now if unfollower.user.email_verified?
     end
   end
 
@@ -47,7 +47,7 @@ namespace :users do
           follower = followers.first
           user = twitter_client.user(new_uid.to_i)
           follower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
-          UserMailer.follower(follower).deliver_now
+          UserMailer.follower(follower).deliver_now if follower.user.email_verified?
         end
       end
     end
