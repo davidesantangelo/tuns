@@ -13,8 +13,11 @@ namespace :users do
         user = twitter_client.user(unfollower.uid.to_i)
         unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
         UserMailer.unfollower(unfollower).deliver_now if unfollower.user.email_verified?
-      rescue Twitter::Error::Unauthorized
-        puts "Unauthorized: #{unfollower.id}"
+      rescue Twitter::Error::Unauthorized => e  
+        puts "Unauthorized: #{unfollower.id} Msg: #{e.message}"
+        next
+      rescue Twitter::Error::Forbidden => e  
+        puts "Forbidden: #{unfollower.id} Msg: #{e.message}"
         next
       end
     end
@@ -56,8 +59,11 @@ namespace :users do
             UserMailer.follower(follower).deliver_now if follower.user.email_verified?
           end
         end
-      rescue Twitter::Error::Unauthorized
-        puts "Unauthorized: #{user.id}"
+      rescue Twitter::Error::Unauthorized => e  
+        puts "Unauthorized: #{user.id} Msg: #{e.message}"
+        next
+      rescue Twitter::Error::Forbidden => e  
+        puts "Forbidden: #{user.id} Msg: #{e.message}"
         next
       end
     end
