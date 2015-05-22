@@ -19,6 +19,9 @@ namespace :users do
       rescue Twitter::Error::Forbidden => e  
         puts "Forbidden: #{unfollower.id} Msg: #{e.message}"
         next
+      rescue Twitter::Error::NotFound => e
+        puts "NotFound: #{unfollower.id} Msg: #{e.message}"
+        next
       end
     end
   end
@@ -64,6 +67,9 @@ namespace :users do
         next
       rescue Twitter::Error::Forbidden => e  
         puts "Forbidden: #{user.id} Msg: #{e.message}"
+        next
+      rescue Twitter::Error::NotFound => e
+        puts "NotFound: #{user.id} Msg: #{e.message}"
         next
       end
     end
