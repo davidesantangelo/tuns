@@ -1,5 +1,7 @@
 namespace :users do
   task lookup: :environment do
+    logger = Logger.new('log/tasks.log')
+    logger.info ("#{Time.now}: LOOKUP STARTED")
     Unfollower.where(updated: false).each do |unfollower|
       begin
         twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
@@ -14,19 +16,22 @@ namespace :users do
         unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
         UserMailer.unfollower(unfollower).deliver_now if unfollower.user.email_verified?
       rescue Twitter::Error::Unauthorized => e  
-        puts "Unauthorized: #{unfollower.id} Msg: #{e.message}"
+        logger.error "Unauthorized: #{unfollower.id} Msg: #{e.message}"
         next
       rescue Twitter::Error::Forbidden => e  
-        puts "Forbidden: #{unfollower.id} Msg: #{e.message}"
+        logger.error "Forbidden: #{unfollower.id} Msg: #{e.message}"
         next
       rescue Twitter::Error::NotFound => e
-        puts "NotFound: #{unfollower.id} Msg: #{e.message}"
+        logger.error "NotFound: #{unfollower.id} Msg: #{e.message}"
         next
       end
     end
+    logger.info ("#{Time.now}: LOOKUP STOPPED")
   end
 
   task unfollowers: :environment do
+    logger = Logger.new('log/tasks.log')
+    logger.info ("#{Time.now}: UNFOLLOWERS STARTED")
     User.all.each do |user|
       begin
         twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
@@ -63,16 +68,17 @@ namespace :users do
           end
         end
       rescue Twitter::Error::Unauthorized => e  
-        puts "Unauthorized: #{user.id} Msg: #{e.message}"
+        logger.error "Unauthorized: #{user.id} Msg: #{e.message}"
         next
       rescue Twitter::Error::Forbidden => e  
-        puts "Forbidden: #{user.id} Msg: #{e.message}"
+        logger.error "Forbidden: #{user.id} Msg: #{e.message}"
         next
       rescue Twitter::Error::NotFound => e
-        puts "NotFound: #{user.id} Msg: #{e.message}"
+        logger.error "NotFound: #{user.id} Msg: #{e.message}"
         next
       end
     end
+    logger.info ("#{Time.now}: UNFOLLOWERS STOPPED")
   end
 
   def comparelist(old_list, new_list)
