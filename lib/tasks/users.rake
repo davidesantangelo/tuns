@@ -1,54 +1,64 @@
 namespace :users do
   task lookup: :environment do
     Unfollower.where(updated: false).each do |unfollower|
-      twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
-      twitter_client = Twitter::REST::Client.new do |config|
-        config.consumer_key        = twitter_config['consumer_key']
-        config.consumer_secret     = twitter_config['consumer_secret']
-        config.access_token        = unfollower.user.access_token
-        config.access_token_secret = unfollower.user.access_token_secret
-      end
+      begin
+        twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
+        twitter_client = Twitter::REST::Client.new do |config|
+          config.consumer_key        = twitter_config['consumer_key']
+          config.consumer_secret     = twitter_config['consumer_secret']
+          config.access_token        = unfollower.user.access_token
+          config.access_token_secret = unfollower.user.access_token_secret
+        end
 
-      user = twitter_client.user(unfollower.uid.to_i)
-      unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
-      UserMailer.unfollower(unfollower).deliver_now if unfollower.user.email_verified?
+        user = twitter_client.user(unfollower.uid.to_i)
+        unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
+        UserMailer.unfollower(unfollower).deliver_now if unfollower.user.email_verified?
+      rescue Twitter::Error::Unauthorized
+        puts "Unauthorized: #{unfollower.id}"
+        next
+      end
     end
   end
 
   task unfollowers: :environment do
     User.all.each do |user|
-      twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
-      twitter_client = Twitter::REST::Client.new do |config|
-        config.consumer_key        = twitter_config['consumer_key']
-        config.consumer_secret     = twitter_config['consumer_secret']
-        config.access_token        = user.access_token
-        config.access_token_secret = user.access_token_secret
-      end
-
-      old_followers = user.followers.map(&:uid)
-      new_followers = fetch_followers(twitter_client)
-
-      new_elements, deleted_elements = comparelist(old_followers, new_followers)
-
-      deleted_elements.each do |deleted_uid|
-        # move the follower to the unfollowers table
-        Follower.where(user_id: user.id, uid: deleted_uid).destroy_all
-        Unfollower.where(user_id: user.id, uid: deleted_uid).first_or_create
-      end
-
-      new_elements.each do |new_uid|
-        # move the unfollower to the followers table
-        unfollowers = Unfollower.where(user_id: user.id, uid: new_uid)
-        followers = Follower.where(user_id: user.id, uid: new_uid)
-        followers.first_or_create
-
-        if not unfollowers.empty?
-          unfollowers.destroy_all
-          follower = followers.first
-          user = twitter_client.user(new_uid.to_i)
-          follower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
-          UserMailer.follower(follower).deliver_now if follower.user.email_verified?
+      begin
+        twitter_config =  YAML.load_file('config/twitter.yml')[Rails.env]
+        twitter_client = Twitter::REST::Client.new do |config|
+          config.consumer_key        = twitter_config['consumer_key']
+          config.consumer_secret     = twitter_config['consumer_secret']
+          config.access_token        = user.access_token
+          config.access_token_secret = user.access_token_secret
         end
+
+        old_followers = user.followers.map(&:uid)
+        new_followers = fetch_followers(twitter_client)
+
+        new_elements, deleted_elements = comparelist(old_followers, new_followers)
+
+        deleted_elements.each do |deleted_uid|
+          # move the follower to the unfollowers table
+          Follower.where(user_id: user.id, uid: deleted_uid).destroy_all
+          Unfollower.where(user_id: user.id, uid: deleted_uid).first_or_create
+        end
+
+        new_elements.each do |new_uid|
+          # move the unfollower to the followers table
+          unfollowers = Unfollower.where(user_id: user.id, uid: new_uid)
+          followers = Follower.where(user_id: user.id, uid: new_uid)
+          followers.first_or_create
+
+          if not unfollowers.empty?
+            unfollowers.destroy_all
+            follower = followers.first
+            user = twitter_client.user(new_uid.to_i)
+            follower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
+            UserMailer.follower(follower).deliver_now if follower.user.email_verified?
+          end
+        end
+      rescue Twitter::Error::Unauthorized
+        puts "Unauthorized: #{user.id}"
+        next
       end
     end
   end
