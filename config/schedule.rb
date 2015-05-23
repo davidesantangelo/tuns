@@ -1,7 +1,7 @@
-every 5.minutes do
+every 15.minutes do
   rake "users:unfollowers"
 end
 
-every 5.minutes do
+every 10.minutes do
   rake "users:lookup"
 end
