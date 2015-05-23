@@ -25,7 +25,7 @@ namespace :users do
   task unfollowers: :environment do
     logger = Logger.new('log/tasks.log')
     logger.info ("#{Time.now}: UNFOLLOWERS STARTED")
-    User.all.each do |user|
+    User.where("email NOT LIKE 'change@me-%'").each do |user|
       begin
         twitter_client = client(user)
 

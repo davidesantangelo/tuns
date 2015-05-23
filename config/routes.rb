@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   root 'static#index'
   get '/about' => 'static#about', :as => :about
+  get '/thanks' => 'static#thanks', :as => :thanks
 
   resources :users, :path => "/" do
     collection do 
