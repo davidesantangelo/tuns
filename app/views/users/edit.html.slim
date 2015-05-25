@@ -5,22 +5,46 @@
 	  .col-md-offset-3.col-md-6.col-lg-offset-3.col-lg-6
 	  	h2 
 	  		| Edit Profile
-	  	br
-			= form_for @user, :html => {:multipart => true, :id => "update_user"} ,:url => url_for(controller: 'users', action: 'update') do |f|
-				.form-group
-					.controls
-						= f.text_field :name, :autofocus => true, class: 'form-control input-lg no-border-radius', placeholder: 'Your Name', required: true
-				.form-group
-					.controls
-						= f.text_field :email, class: 'form-control input-lg no-border-radius', placeholder: 'Your Email', required: true
-				.form-group
-					.controls
-						= f.text_area :description , class: 'form-control input-lg no-border-radius', placeholder: 'Description', rows: 3
-				.form-group
-				  .controls
-				    = f.check_box :notification
-				    span style="margin-left: 5px" Email Notification
-				    p style="color: #555;font-size: 15px" get messages when someone unfollow or follow you back.
-				.actions
-				  = f.submit 'Save', class: 'btn btn-danger'
-				  = link_to 'Cancel', user_path(@user), class: 'btn btn-secondary', style: 'margin-left: 10px'
+	  	p
+				= form_for @user, :html => {:multipart => true, :id => "update_user"} ,:url => url_for(controller: 'users', action: 'update') do |f|
+					.form-group
+						.controls
+							= f.text_field :name, :autofocus => true, class: 'form-control input-lg no-border-radius', placeholder: 'Your Name', required: true
+					.form-group
+						.controls
+							= f.text_field :email, class: 'form-control input-lg no-border-radius', placeholder: 'Your Email', required: true
+					.form-group
+						.controls
+							= f.text_area :description , class: 'form-control input-lg no-border-radius', placeholder: 'Description', rows: 3
+					.form-group
+					  .controls
+					    = f.check_box :notification
+					    span style="margin-left: 5px" Email Notification
+					    p style="color: #555;font-size: 15px" get messages when someone unfollow or follow you back.
+					.actions
+					  = f.submit 'Save', class: 'btn btn-success btn-fixed'
+					  = link_to 'Cancel', user_path(@user), class: 'btn btn-secondary btn-fixed', style: 'margin-left: 10px'
+	.row
+	  .col-md-offset-3.col-md-6.col-lg-offset-3.col-lg-6
+	  	h2 
+	  		| Delete Account
+	  	p style="color: #555;font-size: 15px"
+	  		| Want to delete your lovely TUNS account? 
+	  		a data-toggle="modal" data-target="#delete-modal" style="cursor:pointer" Click here.
+
+/! Modal
+#delete-modal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+        h4.modal-title Delete account?
+      .modal-body
+       | Deleting your account will be permanent. You'll lose all the acquired information about your 
+       strong = @user.unfollowers.size 
+       |  unfollowers.
+      .modal-footer
+        button.btn.btn-default data-dismiss="modal" type="button"  Close
+        = link_to "Delete", user_path(@user.id), class: 'btn btn-danger btn-fixed', method: :delete
+

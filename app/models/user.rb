@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
   
-  has_many :followers
-  has_many :unfollowers
+  has_many :followers, dependent: :delete_all
+  has_many :unfollowers, dependent: :delete_all
 
-  has_one :identity
-  has_one :extra
+  has_one :identity, dependent: :delete
+  has_one :extra, dependent: :delete
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -66,8 +66,8 @@ class User < ActiveRecord::Base
 
     # Associate the identity with the user if needed
     if identity.user != user
-      identity.user = user
       identity.save!
+      identity.user = user
     end
     user
   end

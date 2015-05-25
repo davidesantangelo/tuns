@@ -1,0 +1,20 @@
+= link_to user_path(current_user), class: 'close'
+  |  &times;
+.page-wrapper
+  .row
+	  .col-md-offset-3.col-md-6.col-lg-offset-3.col-lg-6
+	  	h2 
+	  	  | Donate
+	  	p
+		  	| If you are having fun with this why don’t you buy me just a 
+		  	strong beer (€2)? 
+		  	| You can help me to pay hosting and keep TUNS free (i don't like ADS on website). Thank you!
+
+		  	form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_BLANK" class="pp-donate" 
+				  input name="cmd" type="hidden" value="_s-xclick" /
+				  input name="hosted_button_id" type="hidden" value="JVNCMF2XR9NPY" /
+				  button name="submit"
+				  	i.fa.fa-paypal.fa-fw  
+				  	|  Donate
+				  = link_to 'Not Now', user_path(current_user), class: 'btn btn-secondary btn-fixed', style: 'margin-left: 10px'
+				  img alt="" border="0" height="1" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" 

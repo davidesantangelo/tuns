@@ -38,9 +38,10 @@ class UsersController < ApplicationController
 
   # DELETE /:id.:format
   def destroy
-    @user.destroy
+    reset_session
+    DeleteUserWorker.perform_async(@user.id)
     respond_to do |format|
-      format.html { redirect_to root_url }
+      format.html { redirect_to root_url , notice: 'Your account was successfully deleted.'}
       format.json { head :no_content }
     end
   end
