@@ -41,12 +41,11 @@ input[type="password"]
   height: 40px
   width: 100%
   padding: 0
-  border: px solid #e5e5e5
   border-radius: 2px
   outline: none
   box-sizing: border-box
   -webkit-appearance: none
-  font: 16px 'Source Sans Pro', sans-serif
+  font-size: 16px
   text-indent: 10px
   font-weight: 400
   -webkit-font-smoothing: antialiased
@@ -64,14 +63,13 @@ textarea
   resize: none !important
   display: block
   width: 100%
-  padding: 10px 10px 0 10px
-  border: px solid #e5e5e5
   border-radius: 2px
   outline: none
+  padding: 10px !important
   box-sizing: border-box
   -webkit-appearance: none
   resize: vertical
-  font: 16px 'Source Sans Pro', sans-serif
+  font-size: 16px !important
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   margin: 0 auto
@@ -237,7 +235,7 @@ textarea.url:-ms-input-placeholder
   color: #aaa
   font-size: 20px
   text-align: center
-  margin-top: 10px
+  margin-top: 5px
 
 .navbar-default
   background: none
@@ -250,3 +248,19 @@ textarea.url:-ms-input-placeholder
   font-weight: 300
   letter-spacing: 1px
   color: #3FAEEB !important
+
+.modal
+  margin-top: 100px
+
+.modal-content
+  background: #f9f9f9
+  border-radius: 0
+  
+  .modal-title
+    font-weight: bold
+
+  .modal-header
+    border: 0
+    
+  .modal-footer
+    border: 0

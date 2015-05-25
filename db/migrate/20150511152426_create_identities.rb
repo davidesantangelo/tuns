@@ -1,7 +1,7 @@
 class CreateIdentities < ActiveRecord::Migration
   def change
     create_table :identities do |t|
-      t.references :user, index: true, foreign_key: true, dependent: :delete
+      t.references :user, index: true, foreign_key: true, dependent: :delete, unique: true
       t.string :provider
       t.string :uid
 

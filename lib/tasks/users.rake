@@ -1,7 +1,7 @@
 namespace :users do
   task lookup: :environment do
     logger = Logger.new('log/tasks.log')
-    logger.info ("#{Time.now}: LOOKUP STARTED")
+    logger.info ("LOOKUP STARTED")
     Unfollower.where(updated: false).each do |unfollower|
       begin
         twitter_client = client(unfollower.user)
@@ -19,12 +19,12 @@ namespace :users do
         next
       end
     end
-    logger.info ("#{Time.now}: LOOKUP STOPPED")
+    logger.info ("LOOKUP STOPPED")
   end
 
   task unfollowers: :environment do
     logger = Logger.new('log/tasks.log')
-    logger.info ("#{Time.now}: UNFOLLOWERS STARTED")
+    logger.info ("UNFOLLOWERS STARTED")
     User.where("email NOT LIKE 'change@me-%'").each do |user|
       begin
         twitter_client = client(user)
@@ -64,7 +64,7 @@ namespace :users do
         next
       end
     end
-    logger.info ("#{Time.now}: UNFOLLOWERS STOPPED")
+    logger.info ("UNFOLLOWERS STOPPED")
   end
 
   def client(user)
