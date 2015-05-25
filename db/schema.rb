@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518133932) do
+ActiveRecord::Schema.define(version: 20150522144628) do
 
   create_table "extras", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20150518133932) do
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20150518133932) do
     t.string   "access_token_secret",    limit: 255
     t.string   "slug",                   limit: 255
     t.text     "description",            limit: 65535
+    t.boolean  "notification",           limit: 1,     default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
