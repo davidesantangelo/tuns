@@ -14,3 +14,10 @@ section.top
 .row
   .col-md-8.col-md-offset-2.col-sm-12.col-sm-offset-0
 		= image_tag "land.png", class: 'land-image img-responsive'
+
+row
+  .col-md-8.col-md-offset-2.col-sm-12.col-sm-offset-0.text-center
+    p style="color:#666"
+      | were sent 
+      strong = Unfollower.all.size  
+      |  unfollow notifications
