@@ -7,7 +7,10 @@
 		p TUNS (Twitter Unfollower Notification Service) allow you to Keep track of your unfollowers.
 		
 		h2 What it does?
-		p Every time someone unfollow you, TUNS send you a notification email and every time someone go back to follow, TUNS send you a notification email. There is also a web page that show you all the unfollowers. You want try it?
+		p 
+			|Every time someone unfollow you, TUNS send you a notification email and every time someone go back to follow, TUNS send you a notification email. There is also a web page that show you all the unfollowers. At the moment were sent 
+			strong = Unfollower.all.size 
+			|  unfollow notification. You want try it?
 		= link_to "Continue With Twitter", omniauth_authorize_path(User.new, 'twitter', signin: true)
 		
 		h2 Fork Me
