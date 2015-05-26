@@ -8,13 +8,7 @@ namespace :users do
         user = twitter_client.user(unfollower.uid.to_i)
         unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
         UserMailer.unfollower(unfollower).deliver_now if (unfollower.user.email_verified? and unfollower.user.notification)
-      rescue Twitter::Error::Unauthorized => e  
-        logger.error "Unauthorized: #{unfollower.id} Msg: #{e.message}"
-        next
-      rescue Twitter::Error::Forbidden => e  
-        logger.error "Forbidden: #{unfollower.id} Msg: #{e.message}"
-        next
-      rescue Twitter::Error::NotFound => e
+      rescue Exception => e
         logger.error "NotFound: #{unfollower.id} Msg: #{e.message}"
         next
       end
@@ -55,14 +49,8 @@ namespace :users do
             UserMailer.follower(follower).deliver_now if (follower.user.email_verified? and follower.user.notification)
           end
         end
-      rescue Twitter::Error::Unauthorized => e  
-        logger.error "Unauthorized: #{user.id} Msg: #{e.message}"
-        next
-      rescue Twitter::Error::Forbidden => e  
-        logger.error "Forbidden: #{user.id} Msg: #{e.message}"
-        next
-      rescue Twitter::Error::NotFound => e
-        logger.error "NotFound: #{user.id} Msg: #{e.message}"
+      rescue Exception => e  
+        logger.error "#{e.backtrace.join("\n")}"
         next
       end
     end
