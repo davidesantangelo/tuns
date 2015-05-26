@@ -1,7 +1,7 @@
 namespace :users do
   task lookup: :environment do
-    logger = Logger.new('log/tasks.log')
-    logger.info ("LOOKUP STARTED")
+    logger = Logger.new('log/lookup.log')
+    logger.info ("STARTED")
     Unfollower.where(updated: false).each do |unfollower|
       begin
         twitter_client = client(unfollower.user)
@@ -19,12 +19,12 @@ namespace :users do
         next
       end
     end
-    logger.info ("LOOKUP STOPPED")
+    logger.info ("STOPPED")
   end
 
   task unfollowers: :environment do
-    logger = Logger.new('log/tasks.log')
-    logger.info ("UNFOLLOWERS STARTED")
+    logger = Logger.new('log/unfollowers.log')
+    logger.info ("STARTED")
     User.where("email NOT LIKE 'change@me-%'").each do |user|
       begin
         twitter_client = client(user)
@@ -36,21 +36,23 @@ namespace :users do
         deleted_elements.each do |deleted_uid|
           # move the follower to the unfollowers table
           Follower.where(user_id: user.id, uid: deleted_uid).destroy_all
-          Unfollower.where(user_id: user.id, uid: deleted_uid).first_or_create
+          unfollower = Unfollower.where(user_id: user.id, uid: deleted_uid).first_or_create
+
+          twitter_user = twitter_client.user(unfollower.uid.to_i)
+          unfollower.update_attributes(username: twitter_user.screen_name, name: twitter_user.name, description: twitter_user.description, profile_image_url: twitter_user.profile_image_url, updated: true)
+          UserMailer.unfollower(unfollower).deliver_now if (user.email_verified? and user.notification)
         end
 
         new_elements.each do |new_uid|
           # move the unfollower to the followers table
           unfollowers = Unfollower.where(user_id: user.id, uid: new_uid)
-          followers = Follower.where(user_id: user.id, uid: new_uid)
-          followers.first_or_create
-
+          follower = Follower.where(user_id: user.id, uid: new_uid).first_or_create
+         
           if not unfollowers.empty?
             unfollowers.destroy_all
-            follower = followers.first
             user = twitter_client.user(new_uid.to_i)
             follower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
-            UserMailer.follower(follower).deliver_now if (follower.user.email_verified? and follower.notification)
+            UserMailer.follower(follower).deliver_now if (user.email_verified? and user.notification)
           end
         end
       rescue Twitter::Error::Unauthorized => e  
@@ -64,7 +66,7 @@ namespace :users do
         next
       end
     end
-    logger.info ("UNFOLLOWERS STOPPED")
+    logger.info ("STOPPED")
   end
 
   def client(user)
