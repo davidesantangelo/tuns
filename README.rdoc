@@ -1,5 +1,5 @@
 == TUNS
-Twitter Unfollower Notification Service. With TUNS you can keep track of your twitter unfollower and you will receive an email every time someone unfollow you.
+Twitter Unfollower Notification Service. With TUNS you can keep track of your twitter unfollower and you will receive an email every time someone unfollow you. You can try it at http://tuns.it
 
 == License
 TUNS app is released under the MIT License.
