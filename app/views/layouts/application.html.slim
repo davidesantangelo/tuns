@@ -29,8 +29,6 @@ html
 
     = render partial: 'static/ga_tracking_code'  
 	body
-    a#toTop.btn.btn-secondary
-      i.fa.fa-chevron-up
     .alert-box
      - flash.each do |name, msg|
       - if not msg.blank?
@@ -67,7 +65,7 @@ html
   footer.footer
     .container
       p.text-muted 
-        | Made by 
+        | made by 
         a href="https://twitter.com/daviducolo" 
           | @daviducolo   
         
