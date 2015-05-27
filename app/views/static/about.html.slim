@@ -2,51 +2,53 @@
   | &times;
 
 .row.top
-	.col-md-6
-		.about-detail.animated.fadeIn
-			h2 What is it?
-			p TUNS (Twitter Unfollower Notification Service) allow you to Keep track of your unfollowers. Get a notification when someone unfollow you on Twitter.
-	.col-md-6
-		.about-detail.animated.fadeIn	
-			h2 What it does?
-			p 
-				| Every time someone unfollow or get back to you, TUNS send you a simple notification email. There is also a web page that show you all the unfollowers. At the moment were sent 
-				strong = Unfollower.all.size 
-				|  unfollow notification. You want try it?
-			= link_to omniauth_authorize_path(User.new, 'twitter', signin: true), class: 'about-action'
-			  i.fa.fa-twitter  Continue
-			
-.row
-	.col-md-6		
-		.about-detail.animated.fadeIn
-			h2 Fork Me
-			p 
-				| TUNS Project is totally open source. You can see all te code 
-			  	a href="https://github.com/davidesantangelo/tuns" 
-			  		| here on GitHub. 
-				| I really appreciate any form of contribution that could help this project become helpful for more people other than me.
-	.col-md-6	
-		.about-detail.animated.fadeIn		
-			h2 Donate
-			p 
-				| If you are having fun with this why don’t you buy me just a 
-				strong beer? 
-				| You can help me to pay hosting and keep TUNS free (i don't like ADS on website). Thank you!
+	.col-md-10.col-md-offset-1
+		.row
+			.col-md-6
+				.about-detail.animated.fadeIn
+					h2 What is it?
+					p TUNS (Twitter Unfollower Notification Service) allow you to Keep track of your unfollowers. Get a notification when someone unfollow you on Twitter.
+			.col-md-6
+				.about-detail.animated.fadeIn	
+					h2 What it does?
+					p 
+						| Every time someone unfollow or get back to you, TUNS send you a simple notification email. There is also a web page that show you all the unfollowers. At the moment were sent 
+						strong = Unfollower.all.size 
+						|  unfollow notification. You want try it?
+					= link_to omniauth_authorize_path(User.new, 'twitter', signin: true), class: 'about-action'
+					  i.fa.fa-twitter  Continue
+					
+		.row
+			.col-md-6		
+				.about-detail.animated.fadeIn
+					h2 Fork Me
+					p 
+						| TUNS Project is totally open source. You can see all te code 
+					  	a href="https://github.com/davidesantangelo/tuns" 
+					  		| here on GitHub. 
+						| I really appreciate any form of contribution that could help this project become helpful for more people other than me.
+			.col-md-6	
+				.about-detail.animated.fadeIn		
+					h2 Donate
+					p 
+						| If you are having fun with this why don’t you buy me just a 
+						strong beer? 
+						| You can help me to pay hosting and keep TUNS free (i don't like ADS on website). Thank you!
 
-			form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_BLANK" class="pp-donate about-action" style="margin-top: 0"
-			  input name="cmd" type="hidden" value="_s-xclick" /
-			  input name="hosted_button_id" type="hidden" value="JVNCMF2XR9NPY" /
-			  button name="submit" class="link"
-			  	i.fa.fa-paypal.fa-fw  
-			  	|  Donate
-			  img alt="" border="0" height="1" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" /
-.row
-	.col-md-6		
-		.about-detail.animated.fadeIn
-			h2 Feedbacks
-			p 
-			  | Use the email below to send me your comments. I read all feedback carefully and i really appreciate the support. 
-			  | Tell me what do you think about TUNS.
+					form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_BLANK" class="pp-donate about-action" style="margin-top: 0"
+					  input name="cmd" type="hidden" value="_s-xclick" /
+					  input name="hosted_button_id" type="hidden" value="JVNCMF2XR9NPY" /
+					  button name="submit" class="link"
+					  	i.fa.fa-paypal.fa-fw  
+					  	|  Donate
+					  img alt="" border="0" height="1" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" /
+		.row
+			.col-md-6		
+				.about-detail.animated.fadeIn
+					h2 Feedbacks
+					p 
+					  | Use the email below to send me your comments. I read all feedback carefully and i really appreciate the support. 
+					  | Tell me what do you think about TUNS.
 
-			a href="mailto:davide.santangelo@gmail.com"  
-				| davide.santangelo@gmail.com
+					a href="mailto:davide.santangelo@gmail.com"  
+						| davide.santangelo@gmail.com
