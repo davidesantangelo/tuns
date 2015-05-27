@@ -30,7 +30,7 @@ body
     h1
       font-size: 3em
     p
-      font-size: 1.2em
+      font-size: 1em
 
 a 
   color: #3FAEEB
@@ -278,7 +278,7 @@ textarea.url:-ms-input-placeholder
   background: #fff
   padding: 20px
   margin-bottom: 20px
-  height: 250px
+  height: 350px
   border: 1px solid #f0f0f0
   border-top: 2px solid #3FAEEB
   position: relative
@@ -287,3 +287,11 @@ textarea.url:-ms-input-placeholder
     position: absolute
     right: 20px
     bottom: 20px
+
+@media screen and (min-width: 480px) 
+  .top
+    .inner
+      p
+        font-size: 1.2em
+  .about-detail
+    height: 250px
