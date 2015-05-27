@@ -44,8 +44,8 @@ namespace :users do
          
           if not unfollowers.empty?
             unfollowers.destroy_all
-            user = twitter_client.user(new_uid.to_i)
-            follower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
+            lookup = twitter_client.user(new_uid.to_i)
+            follower.update_attributes(username: lookup.screen_name, name: lookup.name, description: lookup.description, profile_image_url: lookup.profile_image_url, updated: true)
             UserMailer.follower(follower).deliver_now if (follower.user.email_verified? and follower.user.notification)
           end
         end
