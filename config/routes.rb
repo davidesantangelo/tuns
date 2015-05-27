@@ -10,9 +10,9 @@ Rails.application.routes.draw do
 
   resources :users, :path => "/" do
     collection do 
-      match ':id/complete' => 'users#complete', via: [:get, :patch], :as => :complete
+      match 'complete' => 'users#complete', via: [:get, :patch], :as => :complete
       match 'loadmore' => 'users#loadmore', via: [:get]
-      match 'donate' => 'users#donate', via: [:get], :as => :donate
+      match ':id/donate' => 'users#donate', via: [:get], :as => :donate
     end
   end
 end
