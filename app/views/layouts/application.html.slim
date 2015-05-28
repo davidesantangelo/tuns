@@ -48,11 +48,13 @@ html
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            = link_to "TUNS (#{current_user.unfollowers.size})", user_path(current_user), class: 'navbar-brand'  
+            = link_to "TUNS (#{current_user.unfollowers.where(updated: 1).size})", user_path(current_user), class: 'navbar-brand'  
           #navbar.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
               li
                 = link_to "@#{current_user.username}", edit_user_path(current_user)
+              li
+                = link_to "stats", stats_users_path
               li
                 = link_to "donate", donate_users_path(current_user)
               li
@@ -63,13 +65,14 @@ html
         .row
           .col-md-12.col-md-offset-0.text-justify        
 	          == yield
-  footer.footer
-    .container
-      p.text-muted 
-        | made by 
-        a href="https://twitter.com/daviducolo" 
-          | @daviducolo   
-        
+  - if params[:action]!= 'show'          
+    footer.footer
+      .container
+        p.text-muted 
+          | Made By 
+          a href="https://twitter.com/daviducolo" 
+            | Davide Santangelo   
+          
 
 javascript:
   $('.alert').not('.alert-donation').delay(5000).fadeOut(2000);

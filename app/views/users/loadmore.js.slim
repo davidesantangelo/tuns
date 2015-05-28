@@ -1,5 +1,5 @@
 | $('.list-unfollowers').append('
-= escape_javascript(render(partial: "unfollowers", locals: { :@unfollowers => @unfollowers }))
+= escape_javascript(render(partial: "unfollowers", locals: { :@unfollowers => @unfollowers, :@remaining => @remaining }))
 | ');
 
 - if @stop_loading
