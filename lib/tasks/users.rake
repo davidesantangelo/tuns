@@ -8,18 +8,12 @@ namespace :users do
         user = twitter_client.user(unfollower.uid.to_i)
         unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
         UserMailer.unfollower(unfollower).deliver_now if (unfollower.user.email_verified? and unfollower.user.notification)
-      rescue Twitter::Error::Unauthorized => e  
-        logger.error "Unauthorized: #{unfollower.id} Msg: #{e.message}"
-        next
-      rescue Twitter::Error::Forbidden => e  
-        logger.error "Forbidden: #{unfollower.id} Msg: #{e.message}"
-        next
-      rescue Twitter::Error::NotFound => e
-        logger.error "NotFound: #{unfollower.id} Msg: #{e.message}"
+      rescue Exception => e
+        logger.error "ERROR: #{e.message}"
         next
       end
     end
-    logger.info ("STOPPED")
+    logger.error "ERROR UNFOLLOWER: #{unfollower.id} MSG: #{e.message}"
   end
 
   task unfollowers: :environment do
@@ -50,19 +44,13 @@ namespace :users do
          
           if not unfollowers.empty?
             unfollowers.destroy_all
-            user = twitter_client.user(new_uid.to_i)
-            follower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
-            UserMailer.follower(follower).deliver_now if (user.email_verified? and user.notification)
+            lookup = twitter_client.user(new_uid.to_i)
+            follower.update_attributes(username: lookup.screen_name, name: lookup.name, description: lookup.description, profile_image_url: lookup.profile_image_url, updated: true)
+            UserMailer.follower(follower).deliver_now if (follower.user.email_verified? and follower.user.notification)
           end
         end
-      rescue Twitter::Error::Unauthorized => e  
-        logger.error "Unauthorized: #{user.id} Msg: #{e.message}"
-        next
-      rescue Twitter::Error::Forbidden => e  
-        logger.error "Forbidden: #{user.id} Msg: #{e.message}"
-        next
-      rescue Twitter::Error::NotFound => e
-        logger.error "NotFound: #{user.id} Msg: #{e.message}"
+      rescue Exception => e  
+        logger.error "ERROR USER: #{user.id} MSG: #{e.message}"
         next
       end
     end

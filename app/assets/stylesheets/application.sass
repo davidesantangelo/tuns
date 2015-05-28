@@ -15,7 +15,7 @@ body
   line-height: 1.6
   
 body
-  margin-bottom: 60px
+  margin-bottom: 40px
 
   .container
     .wrapper
@@ -26,6 +26,11 @@ body
       text-align: center
 .top
   margin-top: 2em
+  .inner
+    h1
+      font-size: 3em
+    p
+      font-size: 1em
 
 a 
   color: #3FAEEB
@@ -141,7 +146,6 @@ textarea.url:-ms-input-placeholder
   /* Set the fixed height of the footer here */
   height: 40px
   text-align: center
-  font-size: 15px
 
 .land-image 
   text-align: center
@@ -251,6 +255,9 @@ textarea.url:-ms-input-placeholder
   letter-spacing: 1px
   color: #3FAEEB !important
 
+.nav.navbar-nav.navbar-right
+  margin-right: -25px
+
 .modal
   margin-top: 100px
 
@@ -266,3 +273,28 @@ textarea.url:-ms-input-placeholder
     
   .modal-footer
     border: 0
+
+.about-detail
+  background: #fff
+  padding: 20px
+  margin-bottom: 20px
+  height: 340px
+  border: 1px solid #f0f0f0
+  border-top: 2px solid #3FAEEB
+  position: relative
+  
+  p 
+    font-size: 0.9em
+
+  .about-action
+    position: absolute
+    right: 20px
+    bottom: 20px
+
+@media screen and (min-width: 480px) 
+  .top
+    .inner
+      p
+        font-size: 1.2em
+  .about-detail
+    height: 240px
