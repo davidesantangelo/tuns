@@ -16,7 +16,7 @@
 						strong = Unfollower.all.size 
 						|  unfollow notification. You want try it?
 					= link_to omniauth_authorize_path(User.new, 'twitter', signin: true), class: 'about-action'
-					  i.fa.fa-twitter  Continue
+					  | Continue
 					
 		.row
 			.col-md-6		
@@ -39,8 +39,7 @@
 					  input name="cmd" type="hidden" value="_s-xclick" /
 					  input name="hosted_button_id" type="hidden" value="JVNCMF2XR9NPY" /
 					  button name="submit" class="link"
-					  	i.fa.fa-paypal.fa-fw  
-					  	|  Donate
+					  	| Donate
 					  img alt="" border="0" height="1" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" /
 		.row
 			.col-md-6		
