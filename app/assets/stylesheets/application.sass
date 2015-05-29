@@ -95,7 +95,6 @@ textarea.url:-moz-placeholder
 textarea.url:-ms-input-placeholder 
   color: #000
 
-
 \::-webkit-input-placeholder 
   color: #A0A0A0
   -webkit-font-smoothing: antialiased
@@ -113,7 +112,6 @@ textarea.url:-ms-input-placeholder
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
-
 .alert-box
   position: fixed
   top: 0
@@ -122,7 +120,6 @@ textarea.url:-ms-input-placeholder
   text-align: center
   z-index: 99
   width: 100%
-
 
   .alert
     border-radius: 0
@@ -150,6 +147,15 @@ textarea.url:-ms-input-placeholder
 .land-image 
   text-align: center
   margin: 20px auto
+  cursor: pointer
+  -webkit-transition: all 1s ease
+  -moz-transition: all 1s ease
+  -o-transition: all 1s ease
+  -ms-transition: all 1s ease
+  transition: all 1s ease
+
+.land-image:hover
+  -webkit-filter: grayscale(100%)
 
 .close 
   font-size: 30px !important
@@ -278,12 +284,11 @@ textarea.url:-ms-input-placeholder
     border: 0
 
 .about-detail
-  background: #fff
   padding: 20px
   margin-bottom: 20px
   height: 300px
   border: 1px solid #f0f0f0
-  border-top: 2px solid #3FAEEB
+  border: 1px solid #e1e1e1
   position: relative
   
   h2
@@ -296,6 +301,22 @@ textarea.url:-ms-input-placeholder
     right: 20px
     bottom: 20px
 
+.love-detail
+  margin-bottom: 20px
+  height: 150px
+  border: 1px solid #f0f0f0
+  border-left: 1px solid #3FAEEB
+  position: relative
+  
+  h2
+    margin: 0 0 10px 0
+  p 
+    font-size: 0.9em
+
+  .love-user
+    margin-top: 15px
+    font-weight: bold
+
 @media screen and (min-width: 480px) 
   .top
     .inner
@@ -303,3 +324,5 @@ textarea.url:-ms-input-placeholder
         font-size: 1.2em
   .about-detail
     height: 220px
+  .love-detail
+    height: 110px

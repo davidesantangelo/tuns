@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /:username.:format
   def show
-    @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
+    @unfollowers = @user.unfollowers.where(updated: 1).paginate(:page => params[:page])
   end
 
   # PATCH/PUT /:username.:format

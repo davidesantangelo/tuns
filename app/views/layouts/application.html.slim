@@ -65,13 +65,14 @@ html
         .row
           .col-md-12.col-md-offset-0.text-justify        
 	          == yield
+
   - if params[:action]!= 'show'          
     footer.footer
       .container
         p.text-muted 
           | Made By 
           a href="https://twitter.com/daviducolo" 
-            | Davide Santangelo   
+            | Davide Santangelo
           
 
 javascript:
