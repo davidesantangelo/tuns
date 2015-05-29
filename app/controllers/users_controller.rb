@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /:username.:format
   def show
-    @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
+    @unfollowers = @user.unfollowers.where(updated: 1).paginate(:page => params[:page])
   end
 
   # PATCH/PUT /:username.:format
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /:id.:format
+  # DELETE /:username.:format
   def destroy
     reset_session
     DeleteUserWorker.perform_async(@user.id)
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /:id/loadmore
+  # GET /:username/loadmore
   def loadmore
     @stop_loading = false
     @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
