@@ -8,6 +8,7 @@ html
     = stylesheet_link_tag    'circle', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true 
     = stylesheet_link_tag    'animate', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'chartist.min', media: 'all', 'data-turbolinks-track' => true
   	= csrf_meta_tags 
     = favicon_link_tag 'favicon.ico'
 
@@ -38,7 +39,6 @@ html
             span aria-hidden="true" &times;
           span class="sr-only" Close
           = msg
-
     - if user_signed_in? and params[:action]== 'show'
       nav.navbar.navbar-default
         .container
@@ -52,11 +52,11 @@ html
           #navbar.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
               li
-                = link_to "@#{current_user.username}", edit_user_path(current_user)
-              li
                 = link_to "stats", stats_users_path
               li
                 = link_to "donate", donate_users_path(current_user)
+              li
+                = link_to "@#{current_user.username}", edit_user_path(current_user)
               li
                 = link_to "log out", destroy_user_session_path, method: :delete 
           /! /.nav-collapse
@@ -70,9 +70,19 @@ html
     footer.footer
       .container
         p.text-muted 
-          | Made By 
+          | Made by 
           a href="https://twitter.com/daviducolo" 
             | Davide Santangelo
+  - if params[:action]!="privacy"
+      - if not cookies[:cookielaw]
+        .cookielaw
+          strong 
+            |  By using this site you accept our  
+            = link_to "terms", privacy_path
+            |  for analysis, personalized content and advertising.
+          = link_to acceptterms_path, method: :post, class: 'close-cookielaw pull-right'
+            span aria-hidden="true" &times;
+          span class="sr-only" Close
           
 
 javascript:

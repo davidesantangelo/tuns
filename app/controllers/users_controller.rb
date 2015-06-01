@@ -46,13 +46,23 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /:username/loadmore
+  # GET /loadmore
   def loadmore
     @stop_loading = false
     @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
     if @unfollowers.last and current_user.unfollowers.where(updated: 1).last.id == @unfollowers.last.id
       @stop_loading = true
     end
+  end
+
+  # GET /loadstats
+  def loadstats
+    @unfollowers = current_user.unfollowers.where(updated: 1)
+    @today = @unfollowers.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @week = @unfollowers.where("created_at >= ?", 1.week.ago)
+
+    
+    
   end
 
   private
