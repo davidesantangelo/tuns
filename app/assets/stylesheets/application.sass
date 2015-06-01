@@ -166,6 +166,18 @@ textarea.url:-ms-input-placeholder
   opacity: 1
   font-weight: 200
 
+.close-cookielaw
+  font-size: 30px !important
+  color: #444
+  opacity: 1
+  font-weight: 200
+  padding: 0
+  cursor: pointer
+  background: transparent
+  border: 0
+  -webkit-appearance: none
+  color: #3FAEEB
+
 .text 
   margin-top: 10px
   color: #3FAEEB
@@ -287,9 +299,11 @@ textarea.url:-ms-input-placeholder
   padding: 20px
   margin-bottom: 20px
   height: 300px
-  border: 1px solid #f0f0f0
-  border: 1px solid #e1e1e1
   position: relative
+  background: #fff
+  -webkit-transition: all .3s ease
+  -moz-transition: all .3s ease
+  transition: all .3s ease
   
   h2
     margin: 0 0 10px 0
@@ -302,11 +316,14 @@ textarea.url:-ms-input-placeholder
     bottom: 20px
 
 .love-detail
+  padding: 20px
   margin-bottom: 20px
-  height: 150px
-  border: 1px solid #f0f0f0
-  border-left: 1px solid #3FAEEB
+  height: 200px
   position: relative
+  background: #fff
+  -webkit-transition: all .3s ease
+  -moz-transition: all .3s ease
+  transition: all .3s ease
   
   h2
     margin: 0 0 10px 0
@@ -314,8 +331,34 @@ textarea.url:-ms-input-placeholder
     font-size: 0.9em
 
   .love-user
-    margin-top: 15px
+    position: absolute
+    right: 20px
+    bottom: 20px
     font-weight: bold
+    text-transform: uppercase
+    font-size: 15px
+
+.stats-detail
+  padding: 10px
+  text-align: center
+  border: 1px solid #e1e1e1
+  margin-bottom: 20px
+  
+  span
+    font-weight: bold
+
+.cookielaw
+  background: #f9f9f9
+  font-size: 15px
+  height: 40px
+  line-height: 40px
+  padding: 0 20px
+  text-align: center
+  z-index: 9999
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
 
 @media screen and (min-width: 480px) 
   .top
@@ -325,4 +368,4 @@ textarea.url:-ms-input-placeholder
   .about-detail
     height: 220px
   .love-detail
-    height: 110px
+    height: 140px

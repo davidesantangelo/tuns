@@ -1,8 +1,10 @@
 = link_to user_path(current_user), class: 'close'
   |  &times;
+  
+.stats
+	.inner-content.text-center.center
+		h2.animated.fadeIn
+	 		i.fa.fa-circle-o-notch.fa-spin
 
-.inner-content.text-center.center
- h2.animated.fadeInUp
- 	i.fa.fa-line-chart.fa-fw
- 	br  
- 	| coming soon
+	javascript:
+		$.get('/loadstats');

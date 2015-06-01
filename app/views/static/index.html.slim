@@ -6,7 +6,7 @@ section.top
       | Twitter Unfollower Notification Service.    
 .row
   .col-md-4.col-md-offset-4.text-center style="line-height: 40px"
-	  = button_to omniauth_authorize_path(User.new, 'twitter', signin: true), id: "twitter-login", :class=>"btn btn-lg btn-twitter btn-block"
+	  = button_to omniauth_authorize_path(User.new, 'twitter', signin: true), id: "twitter-login", class: 'btn btn-lg btn-twitter btn-block'
 		  i.fa.fa-twitter
 		    |  Continue With Twitter
       p
