@@ -3,11 +3,11 @@ class StaticController < ApplicationController
   end
 
   def privacy
-    cookies[:acceptterms] = true
+    cookies.permanent[:acceptterms] = true
   end
 
   def acceptterms
-  	cookies[:acceptterms] = true
+  	cookies.permanent[:acceptterms] = true
   	redirect_to :back
   end
 end
