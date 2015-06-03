@@ -9,11 +9,10 @@ namespace :users do
         unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
         UserMailer.unfollower(unfollower).deliver_now if (unfollower.user.email_verified? and unfollower.user.notification)
       rescue Exception => e
-        logger.error "ERROR: #{e.message}"
+        logger.error "ERROR UNFOLLOWER: #{unfollower.id} MSG: #{e.message}"
         next
       end
     end
-    logger.error "ERROR UNFOLLOWER: #{unfollower.id} MSG: #{e.message}"
   end
 
   task unfollowers: :environment do
