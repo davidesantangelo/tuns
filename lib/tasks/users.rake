@@ -19,6 +19,11 @@ namespace :users do
     logger = Logger.new('log/unfollowers.log')
     logger.info ("STARTED")
     User.where("email NOT LIKE 'change@me-%'").each do |user|
+
+      if user.extra.followers_count >= 75000
+        next
+      end
+
       begin
         twitter_client = client(user)
 

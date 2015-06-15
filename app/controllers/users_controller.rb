@@ -60,9 +60,6 @@ class UsersController < ApplicationController
     @unfollowers = current_user.unfollowers.where(updated: 1)
     @today = @unfollowers.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @week = @unfollowers.where("created_at >= ?", 1.week.ago)
-
-    
-    
   end
 
   private
