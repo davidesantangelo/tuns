@@ -6,7 +6,13 @@ namespace :users do
       begin
         twitter_client = client(unfollower.user)
         user = twitter_client.user(unfollower.uid.to_i)
-        unfollower.update_attributes(username: user.screen_name, name: user.name, description: user.description, profile_image_url: user.profile_image_url, updated: true)
+        unfollower.update_attributes(
+          username: user.screen_name,
+          name: user.name,
+          description: user.description,
+          profile_image_url: user.profile_image_url,
+          updated: true
+        )
         UserMailer.unfollower(unfollower).deliver_now if (unfollower.user.email_verified? and unfollower.user.notification)
       rescue Exception => e
         logger.error "ERROR UNFOLLOWER: #{unfollower.id} MSG: #{e.message}"
@@ -18,12 +24,10 @@ namespace :users do
   task unfollowers: :environment do
     logger = Logger.new('log/unfollowers.log')
     logger.info ("STARTED")
-    User.where("email NOT LIKE 'change@me-%'").each do |user|
+    User.where("email NOT LIKE 'change@me-%'").find_each do |user|
 
-      if user.extra.followers_count >= 75000
-        next
-      end
-
+      next if user.extra.followers_count >= 75000
+      
       begin
         twitter_client = client(user)
 
@@ -37,7 +41,13 @@ namespace :users do
           unfollower = Unfollower.where(user_id: user.id, uid: deleted_uid).first_or_create
 
           twitter_user = twitter_client.user(unfollower.uid.to_i)
-          unfollower.update_attributes(username: twitter_user.screen_name, name: twitter_user.name, description: twitter_user.description, profile_image_url: twitter_user.profile_image_url, updated: true)
+          unfollower.update_attributes(
+            username: twitter_user.screen_name,
+            name: twitter_user.name,
+            description: twitter_user.description,
+            profile_image_url: twitter_user.profile_image_url,
+            updated: true
+          )
           UserMailer.unfollower(unfollower).deliver_now if (user.email_verified? and user.notification)
         end
 
@@ -45,7 +55,7 @@ namespace :users do
           # move the unfollower to the followers table
           unfollowers = Unfollower.where(user_id: user.id, uid: new_uid)
           follower = Follower.where(user_id: user.id, uid: new_uid).first_or_create
-         
+
           if not unfollowers.empty?
             unfollowers.destroy_all
             lookup = twitter_client.user(new_uid.to_i)
@@ -53,7 +63,7 @@ namespace :users do
             UserMailer.follower(follower).deliver_now if (follower.user.email_verified? and follower.user.notification)
           end
         end
-      rescue Exception => e  
+      rescue Exception => e
         logger.error "ERROR USER: #{user.id} MSG: #{e.message}"
         next
       end
@@ -69,6 +79,7 @@ namespace :users do
       config.access_token        = user.access_token
       config.access_token_secret = user.access_token_secret
     end
+    twitter_client
   end
 
   def comparelist(old_list, new_list)
