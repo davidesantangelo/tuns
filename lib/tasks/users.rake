@@ -13,7 +13,6 @@ namespace :users do
           profile_image_url: user.profile_image_url,
           updated: true
         )
-        UserMailer.unfollower(unfollower).deliver_now if (unfollower.user.email_verified? and unfollower.user.notification)
       rescue Exception => e
         logger.error "ERROR UNFOLLOWER: #{unfollower.id} MSG: #{e.message}"
         next
@@ -48,7 +47,6 @@ namespace :users do
             profile_image_url: twitter_user.profile_image_url,
             updated: true
           )
-          UserMailer.unfollower(unfollower).deliver_now if (user.email_verified? and user.notification)
         end
 
         new_elements.each do |new_uid|
@@ -60,7 +58,6 @@ namespace :users do
             unfollowers.destroy_all
             lookup = twitter_client.user(new_uid.to_i)
             follower.update_attributes(username: lookup.screen_name, name: lookup.name, description: lookup.description, profile_image_url: lookup.profile_image_url, updated: true)
-            UserMailer.follower(follower).deliver_now if (follower.user.email_verified? and follower.user.notification)
           end
         end
       rescue Exception => e
