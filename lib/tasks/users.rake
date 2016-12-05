@@ -30,11 +30,11 @@ namespace :users do
       begin
         twitter_client = client(user)
 
-        old_followers = user.followers.map(&:uid)
+        old_followers = user.followers.pluck(:uid)
         new_followers = fetch_followers(twitter_client)
         new_elements, deleted_elements = comparelist(old_followers, new_followers)
 
-        deleted_elements.each do |deleted_uid|
+        deleted_elements.find_each do |deleted_uid|
           # move the follower to the unfollowers table
           Follower.where(user_id: user.id, uid: deleted_uid).destroy_all
           unfollower = Unfollower.where(user_id: user.id, uid: deleted_uid).first_or_create
@@ -49,12 +49,12 @@ namespace :users do
           )
         end
 
-        new_elements.each do |new_uid|
+        new_elements.find_each do |new_uid|
           # move the unfollower to the followers table
           unfollowers = Unfollower.where(user_id: user.id, uid: new_uid)
           follower = Follower.where(user_id: user.id, uid: new_uid).first_or_create
 
-          if not unfollowers.empty?
+          unless unfollowers.empty?
             unfollowers.destroy_all
             lookup = twitter_client.user(new_uid.to_i)
             follower.update_attributes(username: lookup.screen_name, name: lookup.name, description: lookup.description, profile_image_url: lookup.profile_image_url, updated: true)
@@ -91,6 +91,7 @@ namespace :users do
         new_elements.push(d)
       end
     end
+    
     return new_elements, deleted_elements
   end
 
