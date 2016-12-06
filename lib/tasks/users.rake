@@ -34,7 +34,7 @@ namespace :users do
         new_followers = fetch_followers(twitter_client)
         new_elements, deleted_elements = comparelist(old_followers, new_followers)
 
-        deleted_elements.find_each do |deleted_uid|
+        deleted_elements.each do |deleted_uid|
           # move the follower to the unfollowers table
           Follower.where(user_id: user.id, uid: deleted_uid).destroy_all
           unfollower = Unfollower.where(user_id: user.id, uid: deleted_uid).first_or_create
@@ -49,7 +49,7 @@ namespace :users do
           )
         end
 
-        new_elements.find_each do |new_uid|
+        new_elements.each do |new_uid|
           # move the unfollower to the followers table
           unfollowers = Unfollower.where(user_id: user.id, uid: new_uid)
           follower = Follower.where(user_id: user.id, uid: new_uid).first_or_create
