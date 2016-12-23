@@ -20,12 +20,13 @@ namespace :users do
     end
   end
 
-  task unfollowers: :environment do
+  task :unfollowers, [:user_id] => [:environment, :log] do |_, args|
     logger = Logger.new('log/unfollowers.log')
     logger.info ("STARTED")
-    User.where("email NOT LIKE 'change@me-%'").find_each do |user|
 
-      next if user.extra.followers_count >= 75000
+    users = args.user_id ? User.where(id: args.user_id) : User.where("email NOT LIKE 'change@me-%' AND id NOT IN (SELECT user_id FROM extras WHERE followers_count>=75000)")
+
+    users.find_each do |user|
       
       begin
         twitter_client = client(user)
