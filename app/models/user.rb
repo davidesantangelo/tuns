@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   store :metadata, accessors: [ :profile_image_url, :followers_count, :favourites_count ], coder: JSON
-
+  
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
   extend FriendlyId

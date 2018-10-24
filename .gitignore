@@ -24,6 +24,7 @@ config/master.key
 .env.*
 
 config/omniauth.yml
+congig/twitter.yml
 
 ## Environment normalization:
 /.bundle
