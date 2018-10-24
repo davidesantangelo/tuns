@@ -5,6 +5,8 @@ default: &default
 
 development:
   <<: *default
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   database: tuns_development
 
 test:
@@ -14,3 +16,5 @@ test:
 production:
   <<: *default
   database: tuns_production
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>

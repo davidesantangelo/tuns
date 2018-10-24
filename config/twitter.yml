@@ -1,0 +1,15 @@
+development:
+  consumer_key: SbGAvvdH4rWdTvZpJuAyYEbMK
+  consumer_secret: AnAs2jLqjNC38qn7QGWtPR3H92TYCg48sSXa9vUWlW2mfQph1M
+  access_token:  313166323-ClNbuZCN3a4pZGzvYBZ1w0LdLQBSnHsCd4WZGwx0
+  access_token_secret: rgGr6NACymGaSTRB1TtIhW7UznCJpCFaEQbeEbypek6rv
+
+production:
+  consumer_key: xuPoFRyyMY1T1OnCWY0ocnQ39
+  consumer_secret: uulZJuQBmK2Hl7uhVq0ZO8bvonF5U1EoBOgaA75jc9aI0fRgDL
+  access_token:  313166323-0QVWq1xaPBt9r2pRozskonS9eEhKsBcDXnJDipVX
+  access_token_secret: TtcffBdeVkfbKGkbcgmKLuSdvbxGncdhMm7Rr1bkHnnbR
+
+staging:
+  app_id: 
+  secret:

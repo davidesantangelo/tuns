@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :complete]
-  before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
+  before_action :ensure_signup_complete, only: [:new, :create, :update, :destroy]
 
   # GET /:username.:format
   def show

@@ -66,8 +66,8 @@ class User < ActiveRecord::Base
 
     # Associate the identity with the user if needed
     if identity.user != user
-      identity.save!
       identity.user = user
+      identity.save!
     end
     user
   end

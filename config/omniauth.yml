@@ -1,7 +1,7 @@
 development:
   twitter:
-    app_id: 
-    secret: 
+    app_id: a25jThCWPyuqL6bcKHi04vrkL
+    secret: 0v9OF8NfSw6ytMlZh7Nplyy157QgJUW2YMxrWuRhW4AHlw5f1c
 
 production:
   twitter:

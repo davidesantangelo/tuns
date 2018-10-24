@@ -7,7 +7,7 @@ class StaticController < ApplicationController
   end
 
   def acceptterms
-  	cookies.permanent[:acceptterms] = true
-  	redirect_to :back
+    cookies.permanent[:acceptterms] = true
+    redirect_to :back
   end
 end

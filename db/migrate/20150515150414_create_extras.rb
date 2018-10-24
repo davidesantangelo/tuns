@@ -1,4 +1,4 @@
-class CreateExtras < ActiveRecord::Migration
+class CreateExtras < ActiveRecord::Migration[5.2]
   def change
     create_table :extras do |t|
     	t.references :user, index: true, foreign_key: true, dependent: :delete
