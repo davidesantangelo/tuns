@@ -24,7 +24,7 @@ namespace :users do
     logger = Logger.new('log/unfollowers.log')
     logger.info ("STARTED")
 
-    users = args.user_id ? User.where(id: args.user_id) : User.where("email NOT LIKE 'change@me-%' AND id NOT IN (SELECT user_id FROM extras WHERE followers_count>=75000)")
+    users = args.user_id ? User.where(id: args.user_id) : User.where("email NOT LIKE 'change@me-%' AND followers_count <= 75000")
 
     users.find_each do |user|
       
