@@ -23,9 +23,6 @@ config/master.key
 # TODO Comment out this rule if environment variables can be committed
 .env.*
 
-config/omniauth.yml
-config/twitter.yml
-
 ## Environment normalization:
 /.bundle
 /vendor/bundle
