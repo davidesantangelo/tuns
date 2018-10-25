@@ -1,14 +1,14 @@
 development:
   twitter:
-    app_id: ENV['TW_APP_ID']
-    secret: ENV['TW_APP_SECRET']
+    app_id: <%= ENV['TW_APP_ID'] %>
+    secret: <%= ENV['TW_APP_SECRET'] %>
 
 production:
   twitter:
-    app_id: ENV['TW_APP_ID']
-    secret: ENV['TW_APP_SECRET']
+    app_id: <%= ENV['TW_APP_ID'] %>
+    secret: <%= ENV['TW_APP_SECRET'] %>
 
 staging:
   twitter:
-   app_id: ENV['TW_APP_ID']
-    secret: ENV['TW_APP_SECRET']
+    app_id: <%= ENV['TW_APP_ID'] %>
+    secret: <%= ENV['TW_APP_SECRET'] %>
