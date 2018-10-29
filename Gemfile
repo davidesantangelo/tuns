@@ -46,7 +46,7 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil
 
 gem 'whenever', :require => false
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate', '~> 3.1.0'
 
 # Exception
 gem 'exception_notification', '~> 4.0.1'

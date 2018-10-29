@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   def loadmore
     @stop_loading = false
     @unfollowers = current_user.unfollowers.updated.paginate(page: params[:page])
-    if @unfollowers.last and current_user.unfollowers.updated.last.id == @unfollowers.last.id
+    if @unfollowers.last && current_user.unfollowers.updated.last.id == @unfollowers.last.id
       @stop_loading = true
     end
   end
