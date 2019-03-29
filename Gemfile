@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
+ruby '2.6.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.1'
+gem 'rails', '5.2.3'
 # Use pg as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -31,17 +32,11 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 
-# Slim Template Engine
 gem 'slim-rails'
-# Bootstrap Sass
 gem 'bootstrap-sass', '~> 3.3.4'
-# Font-Awesome
 gem 'font-awesome-rails'
-# A Ruby interface to the Twitter API.
 gem 'twitter'
-# FriendlyId
 gem 'friendly_id', '~> 5.1.0' 
-# SideKiq
 gem 'sidekiq'
 gem 'sinatra', :require => nil
 

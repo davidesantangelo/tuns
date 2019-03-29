@@ -1,18 +1,21 @@
 default: &default
   adapter: postgresql
-  pool: 25
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  url: <%= ENV['DATABASE_URL'] %>
 
 development:
   <<: *default
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
   database: tuns_development
 
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
 test:
   <<: *default
   database: tuns_test
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  pool: 10
+  database: tuns_production
