@@ -57,9 +57,7 @@ class UsersController < ApplicationController
 
   # GET /loadstats
   def loadstats
-    @unfollowers = current_user.unfollowers.updated
-    @today = @unfollowers.where("created_at >= ?", Time.zone.now.beginning_of_day)
-    @week = @unfollowers.where("created_at >= ?", 1.week.ago)
+    # TO DO
   end
 
   private
