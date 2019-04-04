@@ -1,25 +1,4 @@
 namespace :users do
-  task lookup: :environment do
-    logger = Logger.new('log/lookup.log')
-    logger.info ("STARTED")
-    Unfollower.where(updated: false).each do |unfollower|
-      begin
-        twitter_client = client(unfollower.user)
-        user = twitter_client.user(unfollower.uid.to_i)
-        unfollower.update_attributes(
-          username: user.screen_name,
-          name: user.name,
-          description: user.description,
-          profile_image_url: user.profile_image_url,
-          updated: true
-        )
-      rescue Exception => e
-        logger.error "ERROR UNFOLLOWER: #{unfollower.id} MSG: #{e.message}"
-        next
-      end
-    end
-  end
-
   task :unfollowers, [:user_id] => [:environment, :log] do |_, args|
     logger = Logger.new('log/unfollowers.log')
     logger.info ("STARTED")

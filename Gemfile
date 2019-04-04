@@ -33,7 +33,7 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 
 gem 'slim-rails'
-gem 'bootstrap-sass', '~> 3.3.4'
+gem 'bootstrap-sass', '>= 3.4.1'
 gem 'font-awesome-rails'
 gem 'twitter'
 gem 'friendly_id', '~> 5.1.0' 

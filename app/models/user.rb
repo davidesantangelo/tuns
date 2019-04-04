@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   
   has_many :followers, dependent: :delete_all
   has_many :unfollowers, dependent: :delete_all
-
   has_one :identity, dependent: :delete
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
