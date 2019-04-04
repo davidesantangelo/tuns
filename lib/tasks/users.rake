@@ -1,5 +1,5 @@
 namespace :users do
-  task :unfollowers, [:user_id] => [:environment, :log] do |_, args|
+  task :unfollowers, [:user_id] => [:environment] do |_, args|
     logger = Logger.new('log/unfollowers.log')
     logger.info ("STARTED")
 
