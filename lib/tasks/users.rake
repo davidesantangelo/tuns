@@ -1,8 +1,5 @@
 namespace :users do
   task :unfollowers, [:user_id] => [:environment] do |_, args|
-    logger = Logger.new('log/unfollowers.log')
-    logger.info ("STARTED")
-
     users = args.user_id ? User.where(id: args.user_id) : User.where("email NOT LIKE 'change@me-%'")
 
     users.find_each do |user|
@@ -41,11 +38,9 @@ namespace :users do
           end
         end
       rescue Exception => e
-        logger.error "ERROR USER: #{user.id} MSG: #{e.message}"
         next
       end
     end
-    logger.info ("STOPPED")
   end
 
   def client(user)
