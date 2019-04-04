@@ -17,11 +17,6 @@
 					.form-group
 						.controls
 							= f.text_area :description , class: 'form-control input-lg no-border-radius', placeholder: 'Description', rows: 3
-					.form-group
-					  .controls
-					    = f.check_box :notification
-					    span style="margin-left: 5px" Email Notification
-					    p style="color: #555;font-size: 15px" get messages when someone unfollow or follow you back.
 					.actions
 					  = f.submit 'Save', class: 'btn btn-success btn-fixed'
 					  = link_to 'Cancel', user_path(@user), class: 'btn btn-secondary btn-fixed', style: 'margin-left: 10px'

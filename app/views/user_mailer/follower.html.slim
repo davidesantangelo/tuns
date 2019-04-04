@@ -8,7 +8,8 @@ span style="font-size: 14px; color: #444;"
 hr/
 h3 
   = @follower.name
-span = "@#{@follower.username}"
+a.username href="https://www.twitter.com/#{@follower.username}" style="text-decoration: none"
+	= "@#{@follower.username}"
 br/
 br/
 p.desc = @follower.description

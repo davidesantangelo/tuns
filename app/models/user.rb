@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  store :metadata, accessors: [ :profile_image_url, :followers_count, :favourites_count ], coder: JSON
+  
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
   extend FriendlyId
@@ -12,9 +14,7 @@ class User < ActiveRecord::Base
   
   has_many :followers, dependent: :delete_all
   has_many :unfollowers, dependent: :delete_all
-
   has_one :identity, dependent: :delete
-  has_one :extra, dependent: :delete
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -26,6 +26,18 @@ class User < ActiveRecord::Base
     # Note that this may leave zombie accounts (with no associated identity) which
     # can be cleaned up at a later date.
     user = signed_in_resource ? signed_in_resource : identity.user
+
+    attrs = {
+      name: auth.extra.raw_info.name,
+      username: auth.info.nickname || auth.uid,
+      description: auth.info.description,
+      access_token: auth.credentials.token,
+      access_token_secret: auth.credentials.secret,
+      password: Devise.friendly_token[0,20],
+      profile_image_url: auth.extra.raw_info.profile_image_url,
+      followers_count: auth.extra.raw_info.followers_count,
+      favourites_count: auth.extra.raw_info.favourites_count
+    }
 
     # Create the user if needed
     if user.nil?
@@ -39,35 +51,18 @@ class User < ActiveRecord::Base
 
       # Create the user if it's a new registration
       if user.nil?
-        user = User.new(
-          name: auth.extra.raw_info.name,
-          username: auth.info.nickname || auth.uid,
-          description: auth.info.description,
-          access_token: auth.credentials.token,
-          access_token_secret: auth.credentials.secret,
-          email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-          password: Devise.friendly_token[0,20]
-        )
-
+        attrs.merge!(email: email || "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com")
+        user = User.new(attrs)
         user.save!
-
-        extra = Extra.new(
-          profile_image_url: auth.extra.raw_info.profile_image_url,
-          followers_count: auth.extra.raw_info.followers_count,
-          favourites_count: auth.extra.raw_info.favourites_count
-        )
-        extra.user = user
-        extra.save!
       end
     else
-      user.update_attributes(access_token: auth.credentials.token, access_token_secret: auth.credentials.secret)
-      user.extra.update_attributes(profile_image_url: auth.extra.raw_info.profile_image_url, followers_count: auth.extra.raw_info.followers_count, favourites_count: auth.extra.raw_info.favourites_count)
+      user.update_attributes(attrs)
     end
 
     # Associate the identity with the user if needed
     if identity.user != user
-      identity.save!
       identity.user = user
+      identity.save!
     end
     user
   end

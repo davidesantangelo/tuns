@@ -48,7 +48,7 @@ html
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            = link_to "TUNS (#{current_user.unfollowers.where(updated: 1).size})", user_path(current_user), class: 'navbar-brand'  
+            = link_to "TUNS (#{current_user.unfollowers.updated.size})", user_path(current_user), class: 'navbar-brand'  
           #navbar.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
               li
@@ -74,7 +74,7 @@ html
           a href="https://twitter.com/daviducolo" 
             | Davide Santangelo
   - if params[:action]!="privacy"
-      - if not cookies[:cookielaw]
+      - if not cookies[:acceptterms]
         .cookielaw
           strong 
             |  By using this site you accept our  

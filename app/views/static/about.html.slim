@@ -7,14 +7,14 @@
 			.col-md-6
 				.about-detail.animated.fadeIn
 					h2 What is it?
-					p TUNS (Twitter Unfollower Notification Service) allow you to Keep track of your unfollowers. Get a notification when someone unfollow you on Twitter.
+					p TUNS (Twitter Unfollower Notification Service) allow you to Keep track of your unfollowers.
 			.col-md-6
 				.about-detail.animated.fadeIn	
 					h2 What it does?
 					p 
-						| Every time someone unfollow or get back to you, TUNS send you a simple notification email. There is also a web page that show you all the unfollowers. At the moment were sent 
+						| Every time someone unfollow you, TUNS  show you all the unfollowers. At the moment were tracked 
 						strong = Unfollower.all.size 
-						|  unfollow notification. You want try it?
+						|  unfollowers. You want try it?
 					= link_to omniauth_authorize_path(User.new, 'twitter', signin: true), class: 'about-action'
 					  | Continue
 					

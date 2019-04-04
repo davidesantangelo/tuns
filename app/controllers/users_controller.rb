@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :complete]
-  before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
+  before_action :ensure_signup_complete, only: [:new, :create, :update, :destroy]
 
   # GET /:username.:format
   def show
-    @unfollowers = @user.unfollowers.where(updated: 1).paginate(:page => params[:page])
+    @unfollowers = @user.unfollowers.updated.paginate(page: params[:page])
   end
 
   # PATCH/PUT /:username.:format
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         # load all followers uid
         SyncWorker.perform_async(current_user.id)
-        sign_in(@user, :bypass => true)
+        sign_in(@user, bypass: true)
         redirect_to @user, notice: 'Your profile was successfully activated.'
       else
         flash[:error] = "Unable to complete signup due: #{@user.errors.full_messages.to_sentence}"
@@ -49,20 +49,15 @@ class UsersController < ApplicationController
   # GET /loadmore
   def loadmore
     @stop_loading = false
-    @unfollowers = current_user.unfollowers.where(updated: 1).paginate(:page => params[:page])
-    if @unfollowers.last and current_user.unfollowers.where(updated: 1).last.id == @unfollowers.last.id
+    @unfollowers = current_user.unfollowers.updated.paginate(page: params[:page])
+    if @unfollowers.last && current_user.unfollowers.updated.last.id == @unfollowers.last.id
       @stop_loading = true
     end
   end
 
   # GET /loadstats
   def loadstats
-    @unfollowers = current_user.unfollowers.where(updated: 1)
-    @today = @unfollowers.where("created_at >= ?", Time.zone.now.beginning_of_day)
-    @week = @unfollowers.where("created_at >= ?", 1.week.ago)
-
-    
-    
+    # TO DO
   end
 
   private
