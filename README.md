@@ -13,7 +13,7 @@ If you want to support me in server costs, consider buying me a coffee! Thanks!
 
 ## LIVE
 
-A usable hobby version is available here: https://tunsapp.herokuapp.com
+A usable hobby version is available here: https://www.tunsapp.com
 
 ## Built With
 
