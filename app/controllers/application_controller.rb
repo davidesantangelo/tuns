@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
-  
+
   def ensure_signup_complete
     # Ensure we don't go into an infinite loop
     return if action_name == 'complete'

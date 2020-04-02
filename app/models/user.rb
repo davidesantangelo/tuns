@@ -1,23 +1,24 @@
+# frozen_string_literal: true
+
 class User < ActiveRecord::Base
-  store :metadata, accessors: [ :profile_image_url, :followers_count, :favourites_count ], coder: JSON
-  
+  store :metadata, accessors: %i[profile_image_url followers_count favourites_count], coder: JSON
+
   TEMP_EMAIL_PREFIX = 'change@me'
-  TEMP_EMAIL_REGEX = /\Achange@me/
+  TEMP_EMAIL_REGEX = /\Achange@me/.freeze
   extend FriendlyId
   friendly_id :username, use: :slugged
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
-  
+  validates_format_of :email, without: TEMP_EMAIL_REGEX, on: :update
+
   has_many :followers, dependent: :delete_all
   has_many :unfollowers, dependent: :delete_all
   has_one :identity, dependent: :delete
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
-
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
 
@@ -25,7 +26,7 @@ class User < ActiveRecord::Base
     # to prevent the identity being locked with accidentally created accounts.
     # Note that this may leave zombie accounts (with no associated identity) which
     # can be cleaned up at a later date.
-    user = signed_in_resource ? signed_in_resource : identity.user
+    user = signed_in_resource || identity.user
 
     attrs = {
       name: auth.extra.raw_info.name,
@@ -33,7 +34,7 @@ class User < ActiveRecord::Base
       description: auth.info.description,
       access_token: auth.credentials.token,
       access_token_secret: auth.credentials.secret,
-      password: Devise.friendly_token[0,20],
+      password: Devise.friendly_token[0, 20],
       profile_image_url: auth.extra.raw_info.profile_image_url,
       followers_count: auth.extra.raw_info.followers_count,
       favourites_count: auth.extra.raw_info.favourites_count
@@ -68,6 +69,6 @@ class User < ActiveRecord::Base
   end
 
   def email_verified?
-    self.email && self.email !~ TEMP_EMAIL_REGEX
+    email && email !~ TEMP_EMAIL_REGEX
   end
 end

@@ -27,9 +27,9 @@ html
     meta property="og:url" content="http://www.tuns.it"
     meta property="og:image" content="http://tuns.it/images/logo.png"
 
-    /![if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]
+    script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"
 
-    = render partial: 'static/ga_tracking_code'  
+    /![if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]
 	body
     .alert-box
      - flash.each do |name, msg|
@@ -73,20 +73,25 @@ html
           | Made by 
           a href="https://twitter.com/daviducolo" 
             | Davide Santangelo
-  - if params[:action]!="privacy"
-      - if not cookies[:acceptterms]
-        .cookielaw
-          strong 
-            |  By using this site you accept our  
-            = link_to "terms", privacy_path
-            |  for analysis, personalized content and advertising.
-          = link_to acceptterms_path, method: :post, class: 'close-cookielaw pull-right'
-            span aria-hidden="true" &times;
-          span class="sr-only" Close
           
 
 javascript:
   $('.alert').not('.alert-donation').delay(5000).fadeOut(2000);
   $("a#toTop").click(function () {
-   $("html, body").animate({scrollTop: 0}, 200);
+    $("html, body").animate({scrollTop: 0}, 200);
+  });
+
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#237afc"
+      },
+      "button": {
+        "background": "#fff",
+        "text": "#237afc"
+      }
+    },
+    "content": {
+      "href": "https://tunsapp.com/privacy"
+    }
   });

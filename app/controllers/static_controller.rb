@@ -1,13 +1,7 @@
+# frozen_string_literal: true
+
 class StaticController < ApplicationController
-  def index
-  end
+  def index; end
 
-  def privacy
-    cookies.permanent[:acceptterms] = true
-  end
-
-  def acceptterms
-    cookies.permanent[:acceptterms] = true
-    redirect_to :back
-  end
+  def privacy; end
 end
