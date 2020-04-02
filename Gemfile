@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '2.6.1'
@@ -32,15 +34,15 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 
-gem 'slim-rails'
 gem 'bootstrap-sass', '>= 3.4.1'
 gem 'font-awesome-rails'
-gem 'twitter'
-gem 'friendly_id', '~> 5.1.0' 
+gem 'friendly_id', '~> 5.1.0'
 gem 'sidekiq'
-gem 'sinatra', :require => nil
+gem 'sinatra', require: nil
+gem 'slim-rails'
+gem 'twitter'
 
-gem 'whenever', :require => false
+gem 'whenever', require: false
 gem 'will_paginate', '~> 3.1.0'
 
 # Exception
@@ -57,9 +59,8 @@ group :development, :test do
   gem 'web-console', '>= 3.3.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
   gem 'foreman'
+  gem 'spring'
 
   gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
-
