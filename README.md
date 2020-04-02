@@ -13,7 +13,14 @@ If you want to support me in server costs, consider buying me a coffee! Thanks!
 
 ## LIVE
 
-A usable hobby version is available here: https://tunsapp.herokuapp.com
+Official Website: https://www.tunsapp.com
+
+## Built With
+
+- [Ruby on Rails](https://github.com/rails/rails) &mdash; Our back end API is a Rails app. It responds to requests RESTfully in JSON.
+- [PostgreSQL](https://www.postgresql.org/) &mdash; Our main data store is in Postgres.
+- [Redis](https://redis.io/) &mdash; We use Redis as a cache and for transient data.
+- [Sidekiq](http://sidekiq.org) Simple, efficient background processing for Ruby.
 
 ## License
 TUNS app is released under the MIT License.
