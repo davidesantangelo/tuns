@@ -4,10 +4,15 @@ Twitter Unfollower Notification Service. With TUNS you can keep track of your tw
 
 https://i.ibb.co/9HF40hm/Screenshot-2019-04-09-at-12-15-43.png
 
+## Buy me a coffee
+
+If you want to support me in server costs, consider buying me a coffee! Thanks!
+
+<a href="https://www.buymeacoffee.com/582rhJH" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 == LIVE
 
-A usable hobby version is available here: https://tunsme.herokuapp.com
+A usable hobby version is available here: https://tunsapp.herokuapp.com
 
 == License
 TUNS app is released under the MIT License.
