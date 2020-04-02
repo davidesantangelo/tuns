@@ -1,4 +1,4 @@
-== TUNS
+# TUNS
 Twitter Unfollower Notification Service. With TUNS you can keep track of your twitter unfollower. Great success on Product Hunt https://www.producthunt.com/posts/tuns :D.
 
 
@@ -10,14 +10,14 @@ If you want to support me in server costs, consider buying me a coffee! Thanks!
 
 <a href="https://www.buymeacoffee.com/582rhJH" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
-== LIVE
+## LIVE
 
 A usable hobby version is available here: https://tunsapp.herokuapp.com
 
-== License
+## License
 TUNS app is released under the MIT License.
 
-== Contributing
+## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/tuns/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
