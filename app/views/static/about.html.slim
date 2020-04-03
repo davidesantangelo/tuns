@@ -15,7 +15,7 @@
 						| Every time someone unfollow you, TUNS  show you all the unfollowers. At the moment were tracked 
 						strong = Unfollower.all.size 
 						|  unfollowers. You want try it?
-					= link_to omniauth_authorize_path(User.new, 'twitter', signin: true), class: 'about-action'
+					= link_to omniauth_authorize_path(User.new, 'twitter', signin: true), class: 'about-action btn btn-secondary'
 					  | Continue With Twitter
 					
 		.row
@@ -28,7 +28,7 @@
 					p
 						| You can see all te code on GitHub. 
 						| I really appreciate any form of contribution that could help this project become helpful for more people other than me.
-					a.about-action href="https://github.com/davidesantangelo/tuns" GitHub
+					a.btn.btn-secondary.about-action href="https://github.com/davidesantangelo/tuns" GitHub
 			.col-md-6	
 				.about-detail.animated.fadeIn		
 					h2 Donate
@@ -37,7 +37,7 @@
 						strong coffee? 
 						| You can help me to pay hosting and keep TUNS free (i don't like ADS on website). Thank you!
 
-					a.about-action target="_BLANK" href="https://www.buymeacoffee.com/582rhJH" Buy Me a Coffee
+					a.btn.btn-secondary.about-action target="_BLANK" href="https://www.buymeacoffee.com/582rhJH" Buy Me a Coffee
 		.row
 			.col-md-6		
 				.about-detail.animated.fadeIn
@@ -46,7 +46,7 @@
 					  | Use the link below to send me your comments. I read all feedback carefully and i really appreciate the support. 
 					  | Help me imporve TUNS for you.
 
-					a.about-action href="https://github.com/davidesantangelo/tuns/issues" Open Issue
+					a.btn.btn-secondary.about-action href="https://github.com/davidesantangelo/tuns/issues" Open Issue
 
 			.col-md-6		
 				.about-detail.animated.fadeIn
@@ -54,5 +54,5 @@
 					p
 						| Very popular on Product Hunt. Take a look and upvote!
 					p
-					a href="https://www.producthunt.com/posts/tuns?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-tuns" target="_blank"
-						img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=21982&theme=dark&period=daily" alt="TUNS - Get an email when someone unfollows you on Twitter | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px"
+					a.about-action href="https://www.producthunt.com/posts/tuns?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-tuns" target="_blank"
+						img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=21982&theme=dark&period=daily" alt="TUNS - Get an email when someone unfollows you on Twitter | Product Hunt Embed" style="width: 220px; height: 54px;" width="220px" height="54px"
