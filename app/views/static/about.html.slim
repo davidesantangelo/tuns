@@ -12,9 +12,11 @@
 				.about-detail.animated.fadeIn	
 					h2 What it does?
 					p 
-						| Every time someone unfollow you, TUNS  show you all the unfollowers. At the moment were tracked 
+						| Every time someone unfollow you, TUNS show you all the unfollowers. At the moment there are 
+						strong = User.all.size
+						| registered users and were tracked 
 						strong = Unfollower.all.size 
-						|  unfollowers. You want try it?
+						| unfollowers. You want try it?
 					= link_to omniauth_authorize_path(User.new, 'twitter', signin: true), class: 'about-action btn btn-secondary'
 					  | Continue With Twitter
 					
