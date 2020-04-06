@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # app/workers/sync_worker.rb
 class SyncWorker
   include Sidekiq::Worker
 
   def perform(user_id)
-  	user = User.find(user_id)
-    
+    user = User.find(user_id)
+
     twitter_client = Twitter::REST::Client.new do |config|
       config.consumer_key        = ENV.fetch('TW_APP_ID')
       config.consumer_secret     = ENV.fetch('TW_APP_SECRET')
@@ -12,16 +14,16 @@ class SyncWorker
       config.access_token_secret = user.access_token_secret
     end
 
-   	cursor = "-1"
-    while cursor != 0 do
+    cursor = '-1'
+    while cursor != 0
       begin
         limited_followers = twitter_client.follower_ids(cursor: cursor)
         limited_followers.attrs[:ids].each do |id|
           Follower.where(user_id: user.id, uid: id).first_or_create
         end
         cursor = limited_followers.attrs[:next_cursor]
-      rescue Twitter::Error::TooManyRequests => error
-        sleep error.rate_limit.reset_in + 1
+      rescue Twitter::Error::TooManyRequests => e
+        sleep e.rate_limit.reset_in + 1
         retry
       end
     end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-namespace :users do
-  task :unfollowers, [:user_id] => [:environment] do |_, args|
+namespace :unfollowers do
+  task :check, [:user_id] => [:environment] do |_, args|
     users = args.user_id ? User.where(id: args.user_id) : User.where("email NOT LIKE 'change@me-%'")
 
     users.find_each do |user|

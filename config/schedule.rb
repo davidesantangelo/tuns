@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 every 4.hours do
-  rake "users:unfollowers"
+  rake 'unfollowers:check'
 end

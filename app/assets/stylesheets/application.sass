@@ -10,9 +10,13 @@ html
 body
   font-family: 'Lato', sans-seri
   font-size: 17px
-  background: #f0f0f0
+  background: #222222
   margin: 0 0 2em 0
   line-height: 1.6
+  color: #ffffff
+
+p
+  color: #f9f9f9 !important
   
 body
   margin-bottom: 40px
@@ -195,7 +199,7 @@ textarea.url:-ms-input-placeholder
       
 .unfollower
   position: relative
-  background: #fff
+  border: 1px solid #3FAEEB
   padding: 10px
   -webkit-transition: all .3s ease
   -moz-transition: all .3s ease
@@ -204,7 +208,7 @@ textarea.url:-ms-input-placeholder
   margin-bottom: 20px
 
   h3 
-    color: #444
+    color: #ffffff
     margin: 0 0
     font-size: 1.3em
 
@@ -213,7 +217,7 @@ textarea.url:-ms-input-placeholder
 
   .description
     margin-top: 10px
-    color: #555
+    color: #dddddd
     font-size: 0.75em
   
   .date
@@ -230,7 +234,7 @@ textarea.url:-ms-input-placeholder
     height: 48px
 
 .unfollower:hover
-  background: #fbfbfb
+  background: rgb(21, 32, 43)
 
 .pace 
   -webkit-pointer-events: none
@@ -266,8 +270,9 @@ textarea.url:-ms-input-placeholder
   background: none
   padding: 8px 0
   border: 0
-  border-bottom: 1px solid #f5f5f5
+  border-bottom: 1px solid #777777
   margin-bottom: 10px
+  border-radius: 0
 
 .navbar-brand
   font-weight: 300
@@ -276,6 +281,9 @@ textarea.url:-ms-input-placeholder
 
 .nav.navbar-nav.navbar-right
   margin-right: -25px
+
+.navbar-default .navbar-nav > li > a:hover
+  color: #3FAEEB
 
 .modal
   margin-top: 100px
@@ -298,7 +306,7 @@ textarea.url:-ms-input-placeholder
   margin-bottom: 20px
   height: 300px
   position: relative
-  background: #fff
+  border: 1px solid #fff
   -webkit-transition: all .3s ease
   -moz-transition: all .3s ease
   transition: all .3s ease
