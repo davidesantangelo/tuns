@@ -1,5 +1,6 @@
 # TUNS
-Twitter Unfollower Notification Service. With TUNS you can keep track of your twitter unfollower. Great success on Product Hunt https://www.producthunt.com/posts/tuns.
+Twitter Unfollower Notification Service. With TUNS you can keep track of your twitter unfollower. 
+Great success on Product Hunt https://www.producthunt.com/posts/tuns.
 
 
 <a href="https://ibb.co/qsKZxKG"><img src="https://i.ibb.co/r6YWvYP/Screenshot-2020-04-07-at-11-46-08.png" alt="Screenshot-2020-04-07-at-11-46-08" border="0"></a>
