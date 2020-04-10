@@ -18,7 +18,6 @@ Rails.application.routes.draw do
       get 'loadmore' => 'users#loadmore'
       get ':id/donate' => 'users#donate', :as => :donate
       get 'stats' => 'users#stats', :as => :stats
-      get 'loadstats' => 'users#loadstats'
     end
   end
 end

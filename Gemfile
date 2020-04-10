@@ -35,8 +35,11 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 
 gem 'bootstrap-sass', '>= 3.4.1'
+gem 'chartjs-ror'
 gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.1.0'
+gem 'groupdate'
+gem 'mustache', '~> 1.0'
 gem 'sidekiq'
 gem 'sinatra', require: nil
 gem 'slim-rails'

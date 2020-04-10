@@ -1,10 +1,18 @@
 = link_to user_path(current_user), class: 'close'
   |  &times;
   
-.stats
-	.inner-content.text-center.center
-		h2.animated.fadeIn
-	 		i.fa.fa-circle-o-notch.fa-spin
+.page-wrapper
+	.row
+	  .col-md-offset-0.col-md-12
 
-	javascript:
-		$.get('/loadstats');
+			= line_chart @chart.hour_line_chart_data, { height: 180, responsive: true }
+
+			br/
+
+			= line_chart @chart.week_line_chart_data, { height: 180, responsive: true }
+
+			br/
+
+			= line_chart @chart.month_line_chart_data, { height: 180, responsive: true }
+				
+			

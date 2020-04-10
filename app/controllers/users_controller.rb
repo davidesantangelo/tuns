@@ -57,9 +57,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /loadstats
-  def loadstats
-    # TO DO
+  def stats
+    @chart = Chart.new(current_user)
   end
 
   private
