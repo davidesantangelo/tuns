@@ -1,9 +1,12 @@
 # TUNS
-Twitter Unfollower Notification Service. With TUNS you can keep track of your twitter unfollower. Great success on Product Hunt https://www.producthunt.com/posts/tuns.
+Twitter Unfollower Notification Service. With TUNS you can keep track of your twitter unfollower. 
+Great success on Product Hunt https://www.producthunt.com/posts/tuns.
 
 
+<a href="https://ibb.co/qsKZxKG"><img src="https://i.ibb.co/r6YWvYP/Screenshot-2020-04-07-at-11-46-08.png" alt="Screenshot-2020-04-07-at-11-46-08" border="0"></a>
 
-<a href="https://i.ibb.co/9HF40hm/Screenshot-2019-04-09-at-12-15-43.png"><img src="https://i.ibb.co/9HF40hm/Screenshot-2019-04-09-at-12-15-43.png" border="0"></a><br />
+
+<a href="https://ibb.co/zVc4cW5"><img src="https://i.ibb.co/TMXgXDT/Screenshot-2020-04-07-at-11-41-53.png" alt="Screenshot-2020-04-07-at-11-41-53" border="0"></a>
 
 ## Buy me a coffee
 
@@ -20,7 +23,8 @@ Official Website: https://www.tunsapp.com
 - [Ruby on Rails](https://github.com/rails/rails) &mdash; Our back end API is a Rails app. It responds to requests RESTfully in JSON.
 - [PostgreSQL](https://www.postgresql.org/) &mdash; Our main data store is in Postgres.
 - [Redis](https://redis.io/) &mdash; We use Redis as a cache and for transient data.
-- [Sidekiq](http://sidekiq.org) Simple, efficient background processing for Ruby.
+- [Sidekiq](http://sidekiq.org) &mdash; Simple, efficient background processing for Ruby.
+- [Chartjs-ror](https://github.com/airblade/chartjs-ror) &mdash; Simplifies using Chart.js in Rails.
 
 ## License
 TUNS app is released under the MIT License.
