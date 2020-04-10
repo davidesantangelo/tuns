@@ -20,8 +20,8 @@ Official Website: https://www.tunsapp.com
 - [Ruby on Rails](https://github.com/rails/rails) &mdash; Our back end API is a Rails app. It responds to requests RESTfully in JSON.
 - [PostgreSQL](https://www.postgresql.org/) &mdash; Our main data store is in Postgres.
 - [Redis](https://redis.io/) &mdash; We use Redis as a cache and for transient data.
-- [Sidekiq](http://sidekiq.org) Simple, efficient background processing for Ruby.
-- [Chartjs-ror](https://github.com/airblade/chartjs-ror) Simplifies using Chart.js in Rails.
+- [Sidekiq](http://sidekiq.org) &mdash; Simple, efficient background processing for Ruby.
+- [Chartjs-ror](https://github.com/airblade/chartjs-ror) &mdash; Simplifies using Chart.js in Rails.
 
 ## License
 TUNS app is released under the MIT License.
