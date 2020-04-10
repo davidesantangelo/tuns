@@ -8,7 +8,7 @@ class Chart
   end
 
   def hour_line_chart_data
-    data_hash = user.unfollowers.unscoped.group_by_hour_of_day(:created_at, format: '%-l %P', range: 1.day.ago.midnight..Time.current).count
+    data_hash = Unfollower.unscoped.where(user: user).group_by_hour_of_day(:created_at, format: '%-l %P', range: 1.day.ago.midnight..Time.current).count
 
     {
       labels: data_hash.keys,
@@ -25,7 +25,7 @@ class Chart
   end
 
   def week_line_chart_data
-    data_hash = user.unfollowers.unscoped.group_by_week(:created_at, week_start: :monday, last: 2).count
+    data_hash = Unfollower.unscoped.where(user: user).group_by_week(:created_at, week_start: :monday, last: 3).count
 
     {
       labels: data_hash.keys,
@@ -42,7 +42,7 @@ class Chart
   end
 
   def month_line_chart_data
-    data_hash = user.unfollowers.unscoped.group_by_month(:created_at, last: 2).count
+    data_hash = Unfollower.unscoped.where(user: user).group_by_month(:created_at, last: 3).count
 
     {
       labels: data_hash.keys,
