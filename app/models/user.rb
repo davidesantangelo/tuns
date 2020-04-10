@@ -68,6 +68,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def last_updated_unfollower_id
+    unfollowers.updated.last.id
+  end
+
   def email_verified?
     email && email !~ TEMP_EMAIL_REGEX
   end

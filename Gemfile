@@ -40,6 +40,7 @@ gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'groupdate'
 gem 'mustache', '~> 1.0'
+gem 'rubocop'
 gem 'sidekiq'
 gem 'sinatra', require: nil
 gem 'slim-rails'
