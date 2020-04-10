@@ -21,6 +21,7 @@ Official Website: https://www.tunsapp.com
 - [PostgreSQL](https://www.postgresql.org/) &mdash; Our main data store is in Postgres.
 - [Redis](https://redis.io/) &mdash; We use Redis as a cache and for transient data.
 - [Sidekiq](http://sidekiq.org) Simple, efficient background processing for Ruby.
+- [Chartjs-ror](https://github.com/airblade/chartjs-ror) Simplifies using Chart.js in Rails.
 
 ## License
 TUNS app is released under the MIT License.
