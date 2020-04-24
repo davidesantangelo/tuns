@@ -8,11 +8,11 @@ Great success on Product Hunt https://www.producthunt.com/posts/tuns.
 
 <a href="https://ibb.co/zVc4cW5"><img src="https://i.ibb.co/TMXgXDT/Screenshot-2020-04-07-at-11-41-53.png" alt="Screenshot-2020-04-07-at-11-41-53" border="0"></a>
 
-## Buy me a coffee
+## Product Hunt
 
-If you want to support me in server costs, consider buying me a coffee! Thanks!
-
-<a href="https://www.buymeacoffee.com/582rhJH" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+#4 Product of the day with 253 votes!!
+ 
+<a href="https://www.producthunt.com/posts/tuns?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-tuns" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=21982&theme=dark&period=daily" alt="TUNS - Keep track of your unfollowers on Twitter | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
 
 ## LIVE
 
