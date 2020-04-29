@@ -6,13 +6,7 @@ class SyncWorker
 
   def perform(user_id)
     user = User.find(user_id)
-
-    twitter_client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV.fetch('TW_APP_ID')
-      config.consumer_secret     = ENV.fetch('TW_APP_SECRET')
-      config.access_token        = user.access_token
-      config.access_token_secret = user.access_token_secret
-    end
+    twitter_client = TwitterClient.build(user)
 
     cursor = '-1'
     while cursor != 0
