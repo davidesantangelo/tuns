@@ -3,7 +3,7 @@ class Notification
     begin
       client = TwitterClient.build(User.system)
       
-      client.update("hi @#{unfollower.user.slug} someone has just unfollowed you on Twitter! Check tunsapp.com")
+      client.update("hi @#{unfollower.user.slug} someone has just unfollowed you on Twitter! Check on tunsapp.com")
     rescue StandardError
       false
     end
