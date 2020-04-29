@@ -9,3 +9,4 @@ class TwitterClient
     
     twitter_client
   end
+end
