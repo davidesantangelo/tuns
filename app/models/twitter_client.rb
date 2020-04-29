@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TwitterClient
   def self.build(user)
     twitter_client = Twitter::REST::Client.new do |config|
@@ -6,7 +8,7 @@ class TwitterClient
       config.access_token        = user.access_token
       config.access_token_secret = user.access_token_secret
     end
-    
+
     twitter_client
   end
 end

@@ -18,3 +18,9 @@ Style/HashTransformValues:
 
 Metrics/MethodLength:
   Max: 12
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true

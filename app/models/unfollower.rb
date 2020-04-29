@@ -12,7 +12,7 @@ class Unfollower < ActiveRecord::Base
   after_create :send_notification
 
   def send_notification
-    return unless self.user.notification
+    return unless user.notification
 
     Notification.send(self)
   end
