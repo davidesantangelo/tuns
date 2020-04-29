@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
   has_many :unfollowers, dependent: :delete_all
   has_one :identity, dependent: :delete
 
+  def self.system
+    where(system: true, slug: ENV.fetch('SYSTEM_SLUG', nil)).first
+  end
+
   def self.find_for_oauth(auth, signed_in_resource = nil)
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)

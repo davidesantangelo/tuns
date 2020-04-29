@@ -19,6 +19,11 @@
 					.form-group
 						.controls
 							= f.text_area :description , class: 'form-control input-lg no-border-radius', placeholder: 'Description', rows: 3
+					.form-group
+						.controls
+							= f.check_box :notification
+							span style="margin-left: 5px" Mention Notification
+							p style="color: #555;font-size: 15px" = raw("receive mention from <a href='https://twitter.com/tunsapp'>@tunsapp</a> when someone unfollow you")
 					.actions
 					  = f.submit 'Save', class: 'btn btn-success btn-fixed'
 					  = link_to 'Cancel', user_path(@user), class: 'btn btn-secondary btn-fixed', style: 'margin-left: 10px'

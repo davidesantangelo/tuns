@@ -5,7 +5,7 @@ namespace :unfollowers do
     users = args.user_id ? User.where(id: args.user_id) : User.where("email NOT LIKE 'change@me-%'")
 
     users.find_each do |user|
-      twitter_client = client(user)
+      twitter_client = TwitterClient.build(user)
 
       old_followers = user.followers.pluck(:uid)
       new_followers = fetch_followers(twitter_client)
@@ -40,16 +40,6 @@ namespace :unfollowers do
     rescue StandardError
       next
     end
-  end
-
-  def client(user)
-    twitter_client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV.fetch('TW_APP_ID')
-      config.consumer_secret     = ENV.fetch('TW_APP_SECRET')
-      config.access_token        = user.access_token
-      config.access_token_secret = user.access_token_secret
-    end
-    twitter_client
   end
 
   def comparelist(old_list, new_list)

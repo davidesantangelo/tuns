@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user == current_user ? @user : current_user, bypass: true)
-        format.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
+        format.html { redirect_to edit_user_path(@user), notice: 'Your profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
