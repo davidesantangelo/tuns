@@ -338,7 +338,7 @@ DEPENDENCIES
   omniauth
   omniauth-twitter
   pg
-  puma (~> 4.1)
+  puma (~> 4.3)
   rails (~> 6.0.2, >= 6.0.2.2)
   rubocop
   sass-rails (~> 5.0)
