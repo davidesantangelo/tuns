@@ -14,10 +14,6 @@ Great success on Product Hunt https://www.producthunt.com/posts/tuns.
  
 <a href="https://www.producthunt.com/posts/tuns?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-tuns" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=21982&theme=dark&period=daily" alt="TUNS - Keep track of your unfollowers on Twitter | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
 
-## LIVE
-
-Official Website: https://www.tunsapp.com
-
 ## Built With
 
 - [Ruby on Rails](https://github.com/rails/rails) &mdash; Our back end API is a Rails app. It responds to requests RESTfully in JSON.
